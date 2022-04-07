@@ -111,7 +111,7 @@ body{
 	}
 
 }
-@media (max-width: 800px){
+@media (max-width: 870px){
 	.container-header{
 		padding: 0;
 		flex-flow: column wrap;
