@@ -25,15 +25,65 @@
 			</div>
 		</div>
     </header>
-	<div class="dropdown" style="float:left;">
+
+	<div class="dropdown">
 		<button class="dropbtn">Options</button>
-		<div class="dropdown-content" style="left:0;">
-		<a href="#">Garbage Collection Requests</a>
-		<a href="#">Add an Event</a>
-	
+		<div class="dropdown-content">
+			<a href="#request-jump">Garbage Collection Requests</a>
+			<a href="#event-jump">Add an Event</a>
+			<a href="#report-jump">Report List</a>
 		</div>
-	  
-	  
+	</div>
+
+	<div class="container-text-area">
+		<div id="request-jump"></div>
+		<div class="text-area" >
+			<p>some text</p>
+				
+		</div>
+		<div id="event-jump"></div>
+		<div class="text-area">
+			<h1>Event Creator</h1>
+			<form method="GET" >
+				<label for="event-name">Event Name</label>			
+				<input type="text" name="event-name" required>
+				<label for="event-location">Event Location</label>			
+				<input type="text" name="event-location" required>
+				<label for="description">Event description</label>
+				<textarea name="description" rows="10" cols="40" placeholder="Here you should describe the event" required></textarea>
+				<label for="event-image">Image about the event</label>
+				<input type="file" name="event-image" accept="image/png, image/jpg">
+				<button type="submit">Submit Event</button>
+			</form>
+		</div>
+		<div id="report-jump"></div>
+		<div class="text-area">
+			<table>
+					<tr>
+						<th >Report name</th>
+						<th>From User</th>
+						<th>Download report</th>
+					</tr>
+					<tr>
+						<td>Report#69420</td>
+						<td>Gigel Frone</td>
+						<td>
+							<form method="GET">
+								<button type="submit">Download</button>
+							</form>
+						</td>
+					</tr>
+					<tr >
+						<td>Report#12345</td>
+						<td>Gigi Becali</td>
+						<td>
+							<form method="GET">
+								<button type="submit">Download</button>
+							</form>
+						</td>
+					</tr>
+				</table>
+		</div>
 	</div>
 	
 
