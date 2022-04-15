@@ -4,18 +4,21 @@
 	<title>GaMon</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="style.css">
-	<link rel="stylesheet" href="style-login.css">
+	<link rel="stylesheet" href="../CSS/style.css">
+	<link rel="stylesheet" href="../CSS/style-login.css">
 </head>
 <body>
 	<header class="main-header">
 		<div class="container-header">
 			
 			<div class="container-header-content">
-				 <a href="index.html">Home</a>
+				 <a href="./index.html">Home</a>
 			</div>
 			<div class="container-header-content">
-				<a href="Recycle.html"> Recycle Information</a>
+				<a href="./Recycle.html"> Recycle Events</a>
+			</div>
+			<div class="container-header-content">
+				 <a href="./register.html">Register</a>
 			</div>
 			<div class="container-header-content">
 				<a href="#">Login</a>
@@ -29,12 +32,12 @@
 	<div class="container-text-area">
 		<div class="text-area">
 			<div class="login-area">
-				<form>
+				<form action="./user.html" method="GET">
 					<label for="Username"> Username</label>
-					<input type="text" name="Username">
+					<input type="text" name="Username" id="Username" required>
 					<label for="Password"> Password</label>
-					<input type="password" name="Password">
-					<input type="submit" name="Login">
+					<input type="password" name="Password" id="Password" required>
+					<input type="submit" name="Login" value="Login">
 
 				</form>
 				
@@ -48,11 +51,11 @@
 
 	<div class="image-slider">
 		<figure>
-		<img src="https://wallpaperaccess.com/full/1745101.jpg" alt="poza">
+		<img src="../../Resources/Images/tomberon.jpg" alt="poza">
 		
-		<img src="https://wallpaperaccess.com/full/1751259.jpg" alt="poza">
-	
-		<img src="https://eskipaper.com/images/funny-cat-5.jpg" alt="poza">
+		<img src="../../Resources/Images/trashcans.jpg" alt="poza">
+
+		<img src="../../Resources/Images/teamseas.jpg" alt="poza">
 		</figure>
 	</div>
 	

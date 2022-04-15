@@ -111,7 +111,7 @@ body{
 	}
 
 }
-@media (max-width: 870px){
+@media (max-width: 880px){
 	.container-header{
 		padding: 0;
 		flex-flow: column wrap;
@@ -125,4 +125,8 @@ body{
 	.container-text-area{
 		top:20%;
 	}
+	.image-slider{
+		top:30%;
+	}
+
 }

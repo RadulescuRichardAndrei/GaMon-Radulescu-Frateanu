@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	
+	<title>GaMon</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../CSS/style.css">
+	<link rel="stylesheet" href="../CSS/style_dropdown.css">
+
+</head>
+<body>
+	<header class="main-header">
+		<div class="container-header">
+			
+			<div class="container-header-content">
+				 <a href="./index_superuser.html">Home</a>
+			</div>
+			<div class="container-header-content">
+				<a href="./recycle_superuser.html"> Recycle Events</a>
+			</div>
+			<div class="container-header-content">
+				<a href="./login.html">Logout</a>
+			</div>
+		</div>
+    </header>
+
+	<div class="dropdown">
+		<button class="dropbtn">Options</button>
+		<div class="dropdown-content">
+			<a href="#request-jump">Garbage Collection Requests</a>
+			<a href="#event-jump">Add an Event</a>
+			<a href="#report-jump">Report List</a>
+		</div>
+	</div>
+
+	<div class="container-text-area">
+		<div id="request-jump"></div>
+		<div class="text-area" >
+			<table>
+				<tr>
+					<th>Country</th>
+					<th>City</th>
+					<th>Neighborhood</th>
+					<th>Street Addres</th>
+					<th>Type of trash</th>
+				</tr>
+				<tr>
+					<td>Romania</td>
+					<td>Iasi</td>
+					<td>Nicolina</td>
+					<td>Carpati</td>
+					<td>plastic</td>
+				</tr>
+				<tr>
+					<td>Romania</td>
+					<td>Iasi</td>
+					<td>Nicolina</td>
+					<td>Carpati</td>
+					<td>menajer</td>
+				</tr>
+			</table>
+		</div>
+		<div id="event-jump"></div>
+		<div class="text-area">
+			<h1>Event Creator</h1>
+			<form method="GET" >
+				<label for="event-name">Event Name</label>			
+				<input type="text" name="event-name" required>
+				<label for="event-location">Event Location</label>			
+				<input type="text" name="event-location" required>
+				<label for="description">Event description</label>
+				<textarea name="description" rows="10" cols="40" placeholder="Here you should describe the event" required></textarea>
+				<label for="event-image">Image about the event</label>
+				<input type="file" name="event-image" accept="image/png, image/jpg">
+				<button type="submit">Submit Event</button>
+			</form>
+		</div>
+		<div id="report-jump"></div>
+		<div class="text-area">
+			<table>
+					<tr>
+						<th >Report name</th>
+						<th>From User</th>
+						<th>Download report</th>
+					</tr>
+					<tr>
+						<td>Report#69420</td>
+						<td>Gigel Frone</td>
+						<td>
+							<form method="GET">
+								<button type="submit">Download</button>
+							</form>
+						</td>
+					</tr>
+					<tr >
+						<td>Report#12345</td>
+						<td>Gigi Becali</td>
+						<td>
+							<form method="GET">
+								<button type="submit">Download</button>
+							</form>
+						</td>
+					</tr>
+				</table>
+		</div>
+	</div>
+	
+
+	<div class="image-slider">
+		<figure>
+		<img src="../../Resources/Images/tomberon.jpg" alt="poza">
+		
+		<img src="../../Resources/Images/trashcans.jpg" alt="poza">
+
+		<img src="../../Resources/Images/teamseas.jpg" alt="poza">
+		</figure>
+	</div>
+
+	
+
+
+</body>
+</html>
+
