@@ -11,10 +11,216 @@
 	<section typeof="sa:AuthorsList"> 
 		<h2>Authors</h2>
 		<ul>
-			<li></li>
+			<li typeof="sa:ContributorRole" property="schema:author">
+				<span typeof="schema:Person">
+					<meta property="schema:givenName" content="Richard">
+					<meta property="schema:additionalName" content="Andrei">
+             		<meta property="schema:familyName" content="Radulescu">
+              		<span property="schema:name"> Radulescu Richard-Andrei </span>
+				</span>
+			</li>
+			<li typeof="sa:ContributorRole" property="schema:author">
+				<span typeof="schema:Person">
+					<meta property="schema:givenName" content="Tudor">
+					<meta property="schema:additionalName" content="Andrei">
+             		<meta property="schema:familyName" content="Frateanu">
+              		<span property="schema:name"> Frateanu Tudor-Andrei </span>
+				</span>
+			</li>
 
 		</ul>
 	</section>
+
+	<section>
+		<h1>Table of Contents</h1>
+		<ul>
+			<li>
+				<a href="#introduction"> 1. Introduction</a>
+				<ul>
+            		<li> <a href="#purpose"> 1.1 Purpose </a> </li>
+          		</ul>
+			</li>
+
+			<li>
+          		<a href="#overall_description"> 2. Overall Description </a>
+          	<ul>
+            	<li> <a href="#product_perspective"> 2.1 Product Perspective </a> </li>
+            	<li> <a href="#product_functions"> 2.2 Product Functions </a> </li>
+            	<li> <a href="#user_classes_and_characteristics"> 2.3 User Classes and Characteristics </a> </li>
+          	</ul>
+        	</li>
+
+        	<li>
+          		<a href="#system_features"> 3. System Features </a>
+          		<ul>
+            		<li> <a href="#administration_of_database"> 3.1 Administration of database via the administration page </a></li>
+            		<li> <a href="#searching_and_filtering"> 3.2 Searching and filtering results from the database </a> 	</li>
+            		<li> <a href="#creating_and_downloading"> 3.3 Creating and downloading numeric reports and charts as HTML, CSV and PDF files </a> </li>
+          		</ul>
+        	</li>
+
+        	<li>
+          		<a href="#development"> 4. Development </a>
+          		<ul>
+            		<li> <a href="#views"> 4.1 Views </a> </li>
+            		<li> <a href="#mvc"> 4.2 MVC </a> </li>
+		        </ul>
+        	</li>
+        	<section>
+
+        	<li>
+          		<a href="#information_share"> 5. Information Share </a>
+          		<ul>
+            		<li> <a href="#github"> 5.1 GitHub </a> </li>
+            		<li> <a href="#discord"> 5.2 Discord </a> </li>
+          		</ul>
+        	</li>
+        	</section>
+
+        	<li>
+        		<a href="#architecture_representation"> 6. Architecture Representation </a>
+          		<ul>
+            		<li> <a href="#uml_diagram"> 6.1 UML Diagram </a> </li>
+          		</ul>
+        	</li>
+
+        	<li>
+          		<a href="#data_sources"> 7. Data Sources </a>
+          		<ul>
+            		<li> <a href="#GCD"> 7.1 Garbage Collection&Dispatch Database </a> </li>
+          		</ul>
+        	</li>
+
+        	<li>
+          		<a href="#contributions"> 8. Contributions </a>
+          		<ul>
+            		<li> <a href="#frontend_contributions"> 8.1 Frontend Contributions </a> </li>
+            		<li> <a href="#backend_contributions"> 8.2 Backend Contributions </a> </li>
+          		</ul>
+        	</li>
+
+
+		</ul>
+	</section>
+
+	<section>
+		<section>
+     		<h1 id="introduction"> 1. Introduction </h1>
+      		<section>
+        		<h2 id="purpose"> 1.1 Purpose </h2>
+        		<p> GaMon is a tool to manage garbage collection in cities, manage reports from users about littering and initializing events for increasing awarness about the benefits of recycling.
+        		</p>
+      		</section>
+    	</section>
+
+    <section>
+      <h1 id="overall_description"> 2. Overall Description </h1>
+      <section>
+        <h2 id="product_perspective"> 2.1 Product Perspective </h2>
+        <p> GaMon is a new, self-contained product, that is not based on any previous projects. </p>
+      </section>
+      <section>
+        <h2 id="product_functions"> 2.2 Product Functions</h2>
+        <p> GaMon allows users to send data about the type of garbage thrown to a database from which specialized users can see the data in a centralized manner. Also the application allows the specialized users to send events about recycling. The administrator has access to the database trough a special page. He can also generate reports about garbage collection.
+        </p>
+      </section>
+      <section>
+        <h2 id="user_classes_and_characteristics"> 2.3 User Classes and Characteristics </h2>
+        <p> 
+        	The application has 3 types of users: user, superuser, administrator.
+        	The client can be either a citizen(user) which delivers his garbage to a bin or a waste management worker who needs to know where the most garbage congested areas are.
+        	The administrator is a priviledged user. He can acces the administrator page from where he can add/delete data from the database. Also he can obtain reports about the garbage accumulation in different areas, at different periods of time as CSV, HTML and PDF files.
+        </p>
+      </section>
+    </section>
+    <section>
+      <h1 id="system_features"> 3. System Features </h1>
+
+      <section>
+        <h2 id="administration_of_database"> 3.1 Administration of database via the administration page </h2>
+        <section>
+          <h3> 3.1.1 Description  </h3>
+          <p> The administrator is responsible for making active changes to the database.
+          </p>
+        </section>
+
+        <section>
+          <h3> 3.1.2 Functional Requirements </h3>
+          <p> 
+          	The user has to input valid credentials in order to access the administrator page. The database must be up and running in order for the queries to take effect. 
+          </p>
+        </section>
+      </section>
+
+
+      <section>
+        <h2 id="searching_and_filtering"> 3.2 Searching and filtering results from the database </h2>
+        <section>
+          <h3> 3.2.1 Description </h3>
+          <p>
+          	The administrator uses the administrator page interface to filter and make queries to the database.
+          </p>
+        </section>
+        <section>
+          <h3> 3.2.2 Functional Requirements </h3>
+          <p>The database must be up and running in order for the queries to take effect. </p>
+        </section>
+      </section>
+
+      <section>
+        <h2 id="creating_and_downloading"> 3.3 Creating and downloading numeric reports and charts as HTML, CSV and PDF files  </h2>
+        <section>
+          <h3> 3.3.1 Description</h3>
+
+          <p> This feature is responsible for generating reports as CSV, HTML, PDF files based on the search
+            filters. </p>
+        </section>
+        <section>
+          <h3> 3.3.2 Functional Requirements </h3>
+          <p>The database must be up and running in order for the queries to take effect. </p>
+        </section>
+      </section>
+	</section>
+
+	<section>
+      <h1 id="development"> 4. Development </h1>
+      <section>
+        <h2 id="views"> 4.1 Views </h2>
+        <p>
+          We create the frontend pages which are stored in views. We made them responsive and we validate them using W3C Validator.
+        </p>
+      </section>
+      <section>
+        <h2 id="mvc"> 4.2 MVC </h2>
+        <p>
+          We separate views, controllers and models to make our application implement the MVC architecture.
+        </p>
+      </section>
+    </section>
+
+    <section>
+      <h1 id="information_share"> 5. Information Share </h1>
+      <section>
+        <h2 id="github"> 5.1 GitHub </h2>
+        <p>
+          We used GitHub to store the project and share informations between us. 
+        </p>
+      </section>
+      <section>
+        <h2 id="discord"> 5.2 Discord </h2>
+        <p>
+          We used Discord to talk about the stages of the projects.
+        </p>
+    </section>
+
+
+
+
+
+
+
+	</section>
+
 </header>
 </body>
 </html>
