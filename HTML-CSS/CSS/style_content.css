@@ -1,0 +1,32 @@
+.table{
+	margin: 0.4em 0;		
+	max-width: 100%;	
+	border-collapse: collapse;	
+	overflow-x:auto;
+	display: inline-block;
+}
+.table td, .table th{
+	border: 0.2em solid white;
+	padding: 0.4em;
+}
+#form-su{
+	display: flex;
+	flex-flow: column;
+	align-self: center;
+}
+#form-su label{
+	margin:0.2em 0;
+	padding: 0.2em;
+}
+#form-su input, #form-su textarea{
+	margin:0.2em 0;
+	padding: 0.2em;
+	width: 50%;
+	align-self: center;
+}
+#form-su button{
+	margin:0.2em 0;
+	padding: 0.2em;
+	width: 20%;
+	align-self: center;
+}
