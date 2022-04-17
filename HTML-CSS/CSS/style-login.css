@@ -15,15 +15,15 @@
 	flex:auto;
 	font-size: 2.8em;
 	color:white;
-	margin-bottom: 0.5em;
+	margin-bottom: 0.5rem;
 }
 .login-area form input{
 font-size: 2.8em;
-margin-bottom: 0.5em;
+margin-bottom: 0.5rem;
 color:white;
 background-color: rgb(43, 186, 81);
-border: 0.2em solid white;
-border-radius: 3em;
+border: 0.2rem solid white;
+border-radius: 3rem;
 text-align: center;
 	flex:auto;
 

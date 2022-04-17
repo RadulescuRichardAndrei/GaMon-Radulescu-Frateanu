@@ -5,22 +5,13 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../CSS/style.css">
+	<link rel="stylesheet" href="../CSS/style_form.css">
 </head>
 <body>
 	<header class="main-header">
 		<div class="container-header">
-			
 			<div class="container-header-content">
-				 <a href="#">Home</a>
-			</div>
-			<div class="container-header-content">
-				<a href="./recycle.html"> Recycle Events</a>
-			</div>
-			<div class="container-header-content">
-				 <a href="./register.html">Register</a>
-			</div>
-			<div class="container-header-content">
-				<a href="./login.html">Login</a>
+				<a href="./login.html">Logout</a>
 			</div>
 		</div>
 		
@@ -28,9 +19,38 @@
 	
 	<div class="container-text-area">
 		<div class="text-area">
-			<p>Some Text</p>
+			<h1>Report Manager</h1>
+			<form method="GET" class="form">
+				<label for="start-date">Starting date</label>
+				<input type="date" name="start-date" required>
+				<label for="end-date">Ending date</label>
+				<input type="date" name="end-date" required>
+				<label for="options-select">Choose criteria</label>
+				<select name="options-select" required>
+					<option value="district" selected>District</option>
+					<option value="neighbourhood">Neighbourhood</option>
+				</select>
+				<button type="submit">Download as HTML</button>
+				<button type="submit">Download as CSV</button>
+				<button type="submit">Download as PDF</button>
+				
+
+			</form>
 		</div>
-		
+		<div class="text-area">
+			<h1>Insert DB</h1>
+			<p>
+				Here there will be a form from which the admin can input parameters for a query that insert a new row in a table.
+			</p>
+
+		</div>
+		<div class="text-area">
+			<h1>Delete DB</h1>
+			<p>
+				Here there will be a form from which the admin can input parameters for a query that deletes a row from a table.
+
+			</p>			
+		</div>
 	</div>
 
 	
