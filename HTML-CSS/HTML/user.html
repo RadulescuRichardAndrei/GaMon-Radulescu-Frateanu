@@ -30,12 +30,12 @@
 		<button class="dropbtn">Options</button>
 		<div class="dropdown-content">
 			<a href="#">Collect My Garbage</a>
-			<a href="#">Garbage History</a>
-			<a href="#">Make Report</a>	
+			<a href="Garbage_History">Garbage History</a>
+			<a href="Report">Make Report</a>	
 		</div>  
 	  
 	</div>
-	
+
 
 	<div class="image-slider">
 		<figure>
@@ -46,8 +46,47 @@
 		<img src="../../Resources/Images/teamseas.jpg" alt="poza">
 		</figure>
 	</div>
-	
+	<div class="container-text-area">
+		<div id="Garbage_History"></div>
+		<div class="text-area" >
+			<table>
+				<tr>
+					<th>Country</th>
+					<th>City</th>
+					<th>Neighborhood</th>
+					<th>Street Addres</th>
+					<th>Type of trash</th>
+				</tr>
+				<tr>
+					<td>Romania</td>
+					<td>Iasi</td>
+					<td>Nicolina</td>
+					<td>Carpati</td>
+					<td>plastic</td>
+				</tr>
+				<tr>
+					<td>Romania</td>
+					<td>Iasi</td>
+					<td>Nicolina</td>
+					<td>Carpati</td>
+					<td>menajer</td>
+				</tr>
+			</table>
+		</div>
 
+		<div id="Report"></div>
+		<div class="text-area">
+			<h1>Report</h1>
+			<form method="GET" >
+			
+				<label for="description">describe here the issue</label>
+				<textarea name="description" rows="10" cols="40" placeholder="Here you should describe the issue" required></textarea>
+				<label for="report-image">Provide us with an image to better understand the problem</label>
+				<input type="file" name="report-image" accept="image/png, image/jpg">
+				<button type="submit">Submit Report</button>
+			</form>
+		</div>
+		
 	
 
 
