@@ -9,6 +9,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../CSS/style.css">
 	<link rel="stylesheet" href="../CSS/style_dropdown.css">
+	<link rel="stylesheet" href="../CSS/style_form.css">
 </head>
 <body>
 	<header class="main-header">
@@ -29,9 +30,9 @@
 	<div class="dropdown">
 		<button class="dropbtn">Options</button>
 		<div class="dropdown-content">
-			<a href="#">Collect My Garbage</a>
-			<a href="Garbage_History">Garbage History</a>
-			<a href="Report">Make Report</a>	
+			<a href="#Req">Collect My Garbage</a>
+			<a href="#Garbage_History">Garbage History</a>
+			<a href="#Report">Make Report</a>	
 		</div>  
 	  
 	</div>
@@ -46,10 +47,13 @@
 		<img src="../../Resources/Images/teamseas.jpg" alt="poza">
 		</figure>
 	</div>
+
+
 	<div class="container-text-area">
 		<div id="Garbage_History"></div>
 		<div class="text-area" >
-			<table>
+			<h1> Garbage History </h1>
+			<table class="table">
 				<tr>
 					<th>Country</th>
 					<th>City</th>
@@ -69,17 +73,27 @@
 					<td>Iasi</td>
 					<td>Nicolina</td>
 					<td>Carpati</td>
-					<td>menajer</td>
+					<td>Bio Waste</td>
 				</tr>
 			</table>
 		</div>
-
+		<div id="Req"></div>
+		<div class="text-area">
+			<h1>Request</h1>
+			<form method="GET" class="form" >
+			
+				<label for="type">type of garbage(bio waste/plastic-paper/glass-metal)</label>
+				<textarea name="type" rows="10" cols="40" placeholder="Type of garbage" required></textarea>
+				<button type="submit">Submit Request</button>
+			</form>
+		</div>
+	
 		<div id="Report"></div>
 		<div class="text-area">
 			<h1>Report</h1>
-			<form method="GET" >
+			<form method="GET" class="form" >
 			
-				<label for="description">describe here the issue</label>
+				<label for="description">Describe here the issue</label>
 				<textarea name="description" rows="10" cols="40" placeholder="Here you should describe the issue" required></textarea>
 				<label for="report-image">Provide us with an image to better understand the problem</label>
 				<input type="file" name="report-image" accept="image/png, image/jpg">
