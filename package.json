@@ -1,0 +1,23 @@
+{
+  "name": "gamon-radulescu-frateanu",
+  "version": "1.0.0",
+  "description": "Web project",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RadulescuRichardAndrei/GaMon-Radulescu-Frateanu.git"
+  },
+  "author": "Radulescu Richard | Tudor Frateanu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RadulescuRichardAndrei/GaMon-Radulescu-Frateanu/issues"
+  },
+  "homepage": "https://github.com/RadulescuRichardAndrei/GaMon-Radulescu-Frateanu#readme",
+  "dependencies": {
+    "pg": "^8.7.3"
+  }
+}
