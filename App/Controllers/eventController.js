@@ -1,36 +1,16 @@
-const pool = require("../API/database");
+const { selectEvents } = require("../Models/eventModel");
 
-module.exports = {
-
-    //Create
-createEvent: async(req,res)=>{
+async function getEvents(req,res){
     try{
-        const {description}= req.body;
-        const newEvent= await pool.query(
-            `Insert into "Evenimente"("ID", "descriere", "image", "idSuperUser") Values($1) Returning *;`,
-            [description]
-        );
-        res.json(newEvent.rows[0]);
+        const events= await selectEvents();
+        res.writeHead(200, {'Content-Type': 'application/json'})
+       
+        res.end(JSON.stringify(events.rows.at(0)));
+
     }catch(err){
-        res.err(err);
+        console.log(err.message);
     }
- 
-},
-    //Delete
-deleteEvent("/Evenimente/:id", async(req,res)=>{
-    try{ 
-        const {id} =
-        const del= await pool.query(
-            `Delete from "Evenimente" where "ID"=${id}`
-        )
-
-    }
-})
-    //Update
-
-    //getAll
-
-    //getByID
-
 
 }
+
+module.exports.getEvents=getEvents;

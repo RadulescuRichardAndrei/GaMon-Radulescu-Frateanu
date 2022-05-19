@@ -4,7 +4,53 @@
 	<title>GaMon</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="../CSS/style.css">
+	<link rel="stylesheet" href="../../Resources/CSS/style.css">
+
+	<script> 
+		function hexToBase64(str) {
+  		  return btoa(String.fromCharCode.apply(null, str.replace(/\r|\n/g, "").replace(/([\da-fA-F]{2}) ?/g, "0x$1 ").replace(/ +$/, "").split(" ")));
+		}
+		
+		const url="/api/getEvents";
+		fetch(url).then((response)=>{
+			return response.json();
+		}).then((data)=>{
+			
+			const root= document.createElement('div');
+			root.classList.add('container-text-area');
+			
+						
+			for(var i=0; i<data.json_agg.length;i++){		
+								
+				const eventItem= document.createElement('div');
+				eventItem.classList.add('text-area');
+				
+				const eventTitle= document.createElement('h1');
+				eventTitle.textContent= data.json_agg.at(i).nume;
+
+				const eventDesc= document.createElement('p');
+				eventDesc.textContent=data.json_agg.at(i).descriere;
+				
+				if(data.json_agg.at(i).image !== null){
+					const img= document.createElement('img');
+					img.src= 'data:image/jpeg;base64,'  + hexToBase64(data.json_agg.at(i).image);
+					eventItem.append(img);
+				}
+
+				eventItem.append(eventTitle,eventDesc);
+				root.append(eventItem);
+			}
+			document.body.append(root);
+		}).catch(function(err){
+			console.log(err);
+		})
+			
+			
+			
+		
+
+	</script>
+
 </head>
 <body>
 	<header class="main-header">
@@ -29,38 +75,6 @@
 	</div>
 		
 	</header>
-	
-	<div class="container-text-area">
-		<div class="text-area">
-			<h1>Event Title1</h1>
-			<p>
-				Here is some details about the event.
-				Here is some details about the event.
-				Here is some details about the event.
-				Here is some details about the event.
-			</p>
-
-		</div>
-		<div class="text-area">
-			<h1>Event Title2</h1>
-			<p>
-				Here is some details about the event.
-				Here is some details about the event.
-				Here is some details about the event.
-				Here is some details about the event.
-			</p>
-		</div>
-		<div class="text-area">
-			<h1>Event Title3</h1>
-			<p>
-				Here is some details about the event.
-				Here is some details about the event.
-				Here is some details about the event.
-				Here is some details about the event.
-			</p>
-		</div>
-	</div>
-
 	
 
 	<div class="image-slider">
