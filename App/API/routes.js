@@ -1,7 +1,7 @@
 const { selectEvents } = require("../Models/eventModel");
 const fs= require('fs');
 const path= require('path');
-const { getEvents } = require("../Controllers/eventController");
+const { getEvents, getEventByID, createEvent, updateEvent,deleteEvent } = require("../Controllers/eventController");
 
 const allRoutes = {
 
@@ -36,7 +36,23 @@ const allRoutes = {
     '/api/getEvents': function (req, res) {
         getEvents(req,res);        
     },
+    '/api/getEventByID': function(req,res){
+        const id=req.url.split('/')[4];
+        
+        getEventByID(req,res,id);
 
+    },
+    '/api/createEvent': function(req,res){
+        createEvent(req,res);
+    },
+    '/api/updateEvent': function(req,res){
+        const id= req.url.split('/')[4];
+        updateEvent(req,res,id);
+    },
+    '/api/deleteEvent': function(req,res){
+        const id= req.url.split('/')[4];
+        deleteEvent(req,res,id);
+    },
     default: (req, res) => {
         res.writeHead(404, { "Content-Type": "text/html" });
         res.end("No Page Found");

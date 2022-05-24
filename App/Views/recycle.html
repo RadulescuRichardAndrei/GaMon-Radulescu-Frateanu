@@ -11,7 +11,7 @@
   		  return btoa(String.fromCharCode.apply(null, str.replace(/\r|\n/g, "").replace(/([\da-fA-F]{2}) ?/g, "0x$1 ").replace(/ +$/, "").split(" ")));
 		}
 		
-		const url="/api/getEvents";
+		const url="/api/Events";
 		fetch(url).then((response)=>{
 			return response.json();
 		}).then((data)=>{
@@ -42,7 +42,7 @@
 			}
 			document.body.append(root);
 		}).catch(function(err){
-			console.log(err);
+			console.log(err.message);
 		})
 			
 			
