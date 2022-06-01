@@ -1,0 +1,81 @@
+const pool = require("../API/database");
+//Create
+async function createPub(req) {
+    return new Promise((resolve, reject) => {
+        try {
+            const { id, tipGunoi, capacitate, idCartier } = req.body;
+            const newPub = pool.query(
+                `Insert into "Pubele"("ID", "tipGunoi", "capacitate", "idCartier") Values($1,$2,$3,$4) Returning *;`,
+                [id, tipGunoi, capacitate, idCartier]
+            );
+            resolve(newEvent);
+        } catch (err) {
+            reject(err);
+        }
+    })
+}
+//Delete
+async function deletePub(id) {
+    return new Promise((resolve, reject) => {
+        try {
+            const deletedPubela = pool.query(
+                `delete from "Pubele" where "ID"=${id};`,
+            );
+            resolve();
+        } catch (err) {
+            reject(err);
+        }
+    })
+
+}
+//UpdateAdm
+async function updatePubA(id, req) {
+    return new Promise((resolve, reject) => {
+        try {
+            const { newId, dataCuratare } = req.body;
+            const updatedPubelaA = pool.query(
+                `update "Pubele" set "ID"=$1, "dataCuratare"=$2 where "ID"=${id};`, [newId,dataCuratare]
+            )
+            resolve(updatedEvent);
+        } catch (err) {
+            reject(err);
+        }
+    })
+}
+//UpdateUsr
+async function updatePubU(id, req) {
+    return new Promise((resolve, reject) => {
+        try {
+            const { cantitate } = req.body;
+            const updatedPubelaU = pool.query(
+                `update "Pubele" set "cantitate"=$1, where "ID"=${id};`, [cantitate]
+            )
+            resolve(updatedEvent);
+        } catch (err) {
+            reject(err);
+        }
+    })
+}
+
+//getByID
+async function selectPubByID(id) {
+    return new Promise((resolve, reject) => {
+        try {
+            const Pubela= pool.query(
+                `select json_agg(t) from (select * from "Pubele" where "ID"=${id}) t`
+            );
+            resolve(Pubela);
+            console.log(err.message);
+        } catch (err) {
+            reject(err);
+        }
+    })
+}
+
+module.exports = {
+    selectPubByID,
+    updatePubA,
+    updatePubU,
+    deletePub,
+    createPub
+}
