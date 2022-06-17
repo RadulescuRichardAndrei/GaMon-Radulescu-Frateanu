@@ -16,7 +16,6 @@ async function getReportByID(req,res,id){
     try{
         const report= await selectRepByID(id);
         res.writeHead(200,{'Content-Type': 'application/json'});
-        console.log
         res.end(JSON.stringify(report.rows.at(0)));
     }catch(err){
         console.log(err.message);

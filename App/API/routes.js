@@ -2,18 +2,27 @@ const { selectEvents } = require("../Models/eventModel");
 const fs= require('fs');
 const path= require('path');
 const { getEvents, getEventByID, createEvent, updateEvent,deleteEvent } = require("../Controllers/eventController");
+const { Register } = require("../Controllers/registerController");
+const { getToken } = require("../Controllers/token");
+const { UserToken } = require("../Controllers/authentificate");
 
 const allRoutes = {
-
+    'auth':function(req,res){
+        UserToken(req,res);
+    },
+    'token':function(req,res){
+        getToken(req,res);
+    },
     'html': function (req, res) {
-        var htmlPath = path.join(__dirname, '..', 'Views', req.url);
+        var file=req.url.split("/");
+        var htmlPath = path.join(__dirname, '..', 'Views',file[file.length-1]);
         var fileStream = fs.createReadStream(htmlPath, "utf8");
         res.statusCode = 200;
         res.setHeader('Content-Type', 'text/html');
         fileStream.pipe(res);
     },
     'jpg': function (req, res) {
-        var jpgPath = path.join(__dirname,'..','..', req.url);
+        var jpgPath = path.join(__dirname,'..','..',req.url);
         var fileStream = fs.createReadStream(jpgPath);
         res.statusCode = 200;
         res.setHeader('Content-Type', 'text/jpg');
@@ -52,6 +61,9 @@ const allRoutes = {
     '/api/deleteEvent': function(req,res){
         const id= req.url.split('/')[4];
         deleteEvent(req,res,id);
+    },
+    '/api/Register': function(req,res){
+        Register(req,res);
     },
     default: (req, res) => {
         res.writeHead(404, { "Content-Type": "text/html" });

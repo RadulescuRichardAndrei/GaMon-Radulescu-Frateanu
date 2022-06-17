@@ -21,7 +21,6 @@ async function getZonaByID(req,res,id){
     try{
         const event= await selectZonByID(id);
         res.writeHead(200,{'Content-Type': 'application/json'});
-        console.log
         res.end(JSON.stringify(event.rows.at(0)));
     }catch(err){
         console.log(err.message);

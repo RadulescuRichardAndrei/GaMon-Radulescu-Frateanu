@@ -1,10 +1,10 @@
 const crypto= require('crypto');
 const fs= require('fs');
-const { format } = require('path');
+const path = require('path');
 
 function genKeyPair(){
     const keyPair= crypto.generateKeyPairSync('rsa',{ 
-        modulLength: 4096,
+        modulusLength: 4096,
         publicKeyEncoding:{
             type:'pkcs1',
             format:'pem'
@@ -14,10 +14,14 @@ function genKeyPair(){
             format:'pem'
         }
     });
-
-    fs.writeFileSync(__dirname + '/id_rsa_pub.pem',keyPair.publicKeyEncoding);
-    fs.writeFileSync(__dirname + '/id_rsa_private.pem',keyPair.privateKeyEncoding);
+   
+    fs.openSync(path.join(__dirname,"..","Keys","PbKey.pem"),"w");
+    fs.writeFileSync(path.join(__dirname,"..","Keys","PbKey.pem"),keyPair.publicKey,"utf8");
+    fs.openSync(path.join(__dirname,"..","Keys","PvKey.pem"),"w");
+    fs.writeFileSync(path.join(__dirname,"..","Keys","PvKey.pem"),keyPair.privateKey,"utf8");
 }
+
+module.exports.genKeyPair=genKeyPair;
 
 
 
