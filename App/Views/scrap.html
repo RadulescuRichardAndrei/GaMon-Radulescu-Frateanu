@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>GaMon</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../../Resources/CSS/style.css">
+	<link rel="stylesheet" href="../../Resources/CSS/style_form.css">
+	
+</head>
+<body>
+	<header class="main-header">
+		<div class="container-header">
+			<div class="container-header-content">
+				<a href="./login.html">Logout</a>
+			</div>
+		</div>
+		
+	</header>
+    <div class="text-area">
+        <h1>Insert DB</h1>
+        <p>
+            Here there will be a form from which the admin can input parameters for a query that insert a new row in a table.
+        </p>
+
+    </div>
+    <div class="text-area">
+        <h1>Delete DB</h1>
+        <p>
+            Here there will be a form from which the admin can input parameters for a query that deletes a row from a table.
+
+        </p>			
+    </div>
+    <head>    
+        <title>Registration Form</title>    
+    </head>    
+    <body>    
+        <link href = "registration.css" type = "text/css" rel = "stylesheet" />    
+        <h2>Sign Up</h2>    
+        <form name = "form1" action="modified.php" method = "post" enctype = "multipart/form-data" >    
+            <div class = "container">    
+                <div class = "form_group">    
+                    <label>First Name:</label>    
+                    <input type = "text" name = "fname" value = "" required/>    
+                </div>    
+                <div class = "form_group">    
+                    <label>Middle Name:</label>    
+                    <input type = "text" name = "mname" value = "" required />    
+                </div>    
+                <div class = "form_group">    
+                    <label>Last Name:</label>    
+                    <input type = "text" name = "lname" value = "" required/>    
+                </div>    
+                <div class = "form_group">    
+                    <label>Password:</label>    
+                    <input type = "password" name = "pwd" value = "" required/>    
+                </div>    
+            </div>    
+        </form>    
+    </body>    
+    <body>
+        <script src="scripts/test.js"></script>
+      
+      
+      <form>
+      <input id="firstName" type="text" class="form-control" name="firstName" placeholder="First Name">
+       <input id="lastName" type="text" class="form-control" name="lastName" placeholder="Last Name">
+       <input id="userName" type="text" class="form-control" name="userName" placeholder="Username">
+       <input id="inputText" type="text" class="form-control" name="email" placeholder="Email">
+      <input id="currentPassword" type="password" class="form-control" name="currentPassword" placeholder="Current Password"> 
+      
+       <input type="submit" onclick="saveAccount()" id="createAccountButton" class="button2" value="Create Account"></input>
+      
+      </form>
+      
+        </body>
+    
+
+</body>
+</html>
