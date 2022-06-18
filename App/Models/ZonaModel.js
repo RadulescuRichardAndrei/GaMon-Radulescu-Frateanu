@@ -1,25 +1,36 @@
 const pool = require("../API/database");
-//Create
-async function createZon(req) {
+async function selectZone(){
     return new Promise((resolve, reject) => {
         try {
-            const { id,  nume } = req.body;
-            const newZona = pool.query(
-                `Insert into "Zone"("ID", "Nume") Values($1,$2) Returning *;`,
-                [id, nume,]
+            const Zone = pool.query(
+                `select json_agg(t) from (Select * from "Zone") t;`
+            )
+            resolve(Zone);
+        } catch (err) {
+            reject(err);
+        }
+    })
+}
+async function creatZona(req) {
+    return new Promise((resolve, reject) => {
+        try {
+            const { id,  nume, adresa, idZona  } = req.body;
+            const newCartier = pool.query(
+                `Insert into "Cartiere"("ID", "Nume", "adresa", "idZona") Values($1,$2,$3,$4) Returning *;`,
+                [id, nume, adresa, idZona]
             );
-            resolve(newZona);
+            resolve(newCartier);
         } catch (err) {
             reject(err);
         }
     })
 }
 //Delete
-async function deleteZon(id) {
+async function deletZona(id) {
     return new Promise((resolve, reject) => {
         try {
             const deletedCartier = pool.query(
-                `delete from "Zone" where "ID"=${id};`,
+                `delete from "Cartiere" where "ID"=${id};`,
             );
             resolve();
         } catch (err) {
@@ -28,22 +39,24 @@ async function deleteZon(id) {
     })
 
 }
-//getByID
-async function selectZonByID(id) {
+
+async function selectZonaByID(id) {
     return new Promise((resolve, reject) => {
         try {
-            const Zone= pool.query(
+            const Cartier= pool.query(
                 `select json_agg(t) from (select * from "Zone" where "ID"=${id}) t`
             );
-            resolve(Zone);
+            resolve(Cartier);
             console.log(err.message);
         } catch (err) {
             reject(err);
         }
     })
 }
-module.exports = {
-    selectZonByID,
-    deleteZon,
-    createZon
+
+module.exports={
+    selectZone,
+    creatZona,
+    deletZona,
+    selectZonaByID
 }

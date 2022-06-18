@@ -1,36 +1,57 @@
-const pool = require("../API/database");
+const { selectEv,createEv,deleteEv,updateEv,selectEvByID } = require("../Models/eventModel");
 
-module.exports = {
-
-    //Create
-createEvent: async(req,res)=>{
+async function getEvents(req,res){
     try{
-        const {description}= req.body;
-        const newEvent= await pool.query(
-            `Insert into "Evenimente"("ID", "descriere", "image", "idSuperUser") Values($1) Returning *;`,
-            [description]
-        );
-        res.json(newEvent.rows[0]);
+        const events= await selectEv();
+        res.writeHead(200, {'Content-Type': 'application/json'})
+       
+        res.end(JSON.stringify(events.rows.at(0)));
+
     }catch(err){
-        res.err(err);
+        console.log(err.message);
     }
- 
-},
-    //Delete
-deleteEvent("/Evenimente/:id", async(req,res)=>{
-    try{ 
-        const {id} =
-        const del= await pool.query(
-            `Delete from "Evenimente" where "ID"=${id}`
-        )
 
+}
+async function getEventByID(req,res,id){
+    try{
+        const event= await selectEvByID(id);
+        res.writeHead(200,{'Content-Type': 'application/json'});
+        res.end(JSON.stringify(event.rows.at(0)));
+    }catch(err){
+        console.log(err.message);
     }
-})
-    //Update
-
-    //getAll
-
-    //getByID
-
-
+}
+async function createEvent(req,res){
+    try{
+        const event= await createEv(req);
+        res.writeHead(200,{'Content-Type': 'application/json'});
+        res.end(JSON.stringify(event.rows.at(0)));
+    }catch(err){
+        console.log(err.message);
+    }
+}
+async function updateEvent(req,res,id){
+    try{
+        const event=await updateEv(id,req);
+        res.writeHead(200,{'Content-Type': 'application/json'});
+        res.end(JSON.stringify(event.rows.at(0)));
+    }catch(err){
+        console.log(err.message);
+    }
+}
+async function deleteEvent(req,res,id){
+    try{
+        const event=await deleteEv(id);
+        res.writeHead(200,{'Content-Type': 'application/json'});
+        res.end(JSON.stringify(event.rows.at(0)));
+    }catch(err){
+        console.log(err.message);
+    }
+}
+module.exports={
+    createEvent,
+    updateEvent,
+    getEventByID,
+    getEvents,
+    deleteEvent,
 }

@@ -71,11 +71,24 @@ async function selectPubByID(id) {
         }
     })
 }
+async function selectPub(){
+    return new Promise((resolve, reject) => {
+        try {
+            const pub = pool.query(
+                `select json_agg(t) from (Select * from "Pubele") t;`
+            )
+            resolve(pub);
+        } catch (err) {
+            reject(err);
+        }
+    })
+}
 
 module.exports = {
     selectPubByID,
     updatePubA,
     updatePubU,
     deletePub,
-    createPub
+    createPub,
+    selectPub
 }

@@ -28,6 +28,19 @@ async function deleteCart(id) {
     })
 
 }
+async function selectCart(){
+    return new Promise((resolve, reject) => {
+        try {
+            const Cartiere = pool.query(
+                `select json_agg(t) from (Select * from "Cartiere") t;`
+            )
+            resolve(Cartiere);
+        } catch (err) {
+            reject(err);
+        }
+    })
+}
+
 //getByID
 async function selectCartByID(id) {
     return new Promise((resolve, reject) => {
@@ -45,5 +58,6 @@ async function selectCartByID(id) {
 module.exports = {
     selectCartByID,
     deleteCart,
-    createCart
+    createCart,
+    selectCart
 }

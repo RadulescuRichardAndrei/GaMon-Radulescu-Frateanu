@@ -1,4 +1,4 @@
-const {  selectPubByID, updatePubA, updatePubU, deletePub, createPub } = require("../Models/PubelaModel");
+const {  selectPubByID, updatePubA, updatePubU, deletePub, createPub, selectPub } = require("../Models/PubelaModel");
 
 async function createPubela(req,res){
     try{
@@ -40,7 +40,15 @@ async function getPubelaByID(req,res,id){
     try{
         const event= await selectPubByID(id);
         res.writeHead(200,{'Content-Type': 'application/json'});
-        console.log
+        res.end(JSON.stringify(event.rows.at(0)));
+    }catch(err){
+        console.log(err.message);
+    }
+}
+async function getPubele(req,res){
+    try{
+        const event= await selectPub();
+        res.writeHead(200,{'Content-Type': 'application/json'});
         res.end(JSON.stringify(event.rows.at(0)));
     }catch(err){
         console.log(err.message);
@@ -52,4 +60,5 @@ module.exports={
     updatePubelaU,
     getPubelaByID,
     deletePubela,
+    getPubele
 }

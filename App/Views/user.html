@@ -1,22 +1,24 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	
-	
-		
 	<title>GaMon</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="../CSS/style.css">
-	<link rel="stylesheet" href="../CSS/style_dropdown.css">
-	<link rel="stylesheet" href="../CSS/style_form.css">
+	<link rel="stylesheet" href="../../Resources/CSS/style.css">
+	<link rel="stylesheet" href="../../Resources/CSS/style_dropdown.css">
+	<link rel="stylesheet" href="../../Resources/CSS/style_form.css">
+	<script src="../../Resources/JS/zone.js"></script>
+	
+	<script src="../../Resources/JS/addGarbage.js"></script>
 </head>
+
 <body>
 	<header class="main-header">
 		<div class="container-header">
-			
+
 			<div class="container-header-content">
-				 <a href="./index_user.html">Home</a>
+				<a href="./index_user.html">Home</a>
 			</div>
 			<div class="container-header-content">
 				<a href="./recycle_user.html"> Recycle Events</a>
@@ -25,94 +27,56 @@
 				<a href="./login.html">Logout</a>
 			</div>
 		</div>
-		
+
 	</header>
 	<div class="dropdown">
 		<button class="dropbtn">Options</button>
 		<div class="dropdown-content">
 			<a href="#Req">Collect My Garbage</a>
 			<a href="#Garbage_History">Garbage History</a>
-			<a href="#Report">Make Report</a>	
-		</div>  
-	  
+			<a href="#Report">Make Report</a>
+		</div>
+
 	</div>
 
 
 	<div class="image-slider">
 		<figure>
-		<img src="../../Resources/Images/tomberon.jpg" alt="poza">
-		
-		<img src="../../Resources/Images/trashcans.jpg" alt="poza">
+			<img src="../../Resources/Images/tomberon.jpg" alt="poza">
 
-		<img src="../../Resources/Images/teamseas.jpg" alt="poza">
+			<img src="../../Resources/Images/trashcans.jpg" alt="poza">
+
+			<img src="../../Resources/Images/teamseas.jpg" alt="poza">
 		</figure>
 	</div>
 
 
 	<div class="container-text-area">
 		<div id="Garbage_History"></div>
-		<div class="text-area" >
-			<h1> Garbage History </h1>
-			<table class="table">
-				<tr>
-					<th>Country</th>
-					<th>City</th>
-					<th>Neighborhood</th>
-					<th>Street Addres</th>
-					<th>Type of trash</th>
-				</tr>
-				<tr>
-					<td>Romania</td>
-					<td>Iasi</td>
-					<td>Nicolina</td>
-					<td>Carpati</td>
-					<td>plastic</td>
-				</tr>
-				<tr>
-					<td>Romania</td>
-					<td>Iasi</td>
-					<td>Nicolina</td>
-					<td>Carpati</td>
-					<td>Bio Waste</td>
-				</tr>
-			</table>
+
+		<div class="text-area">
+			<h1>Add garbage</h1>
+			<div id="form-garbage-request-div">
+				<form class="form" id="form-zone">
+					<label for="zone">Zona:</label>
+					<select id="zone" onchange="selectZona()"></select>
+				</form>
+			</div>
 		</div>
+
 		<div id="Req"></div>
 		<div class="text-area">
-			<h1>Request</h1>
-			<form method="GET" class="form" >
-			
-				<label for="type">type of garbage(bio waste/plastic-paper/glass-metal)</label>
-				<textarea name="type" rows="10" cols="40" placeholder="Type of garbage" required></textarea>
-				<button type="submit">Submit Request</button>
-			</form>
+
 		</div>
-	
+
 		<div id="Report"></div>
 		<div class="text-area">
-			<h1>Report</h1>
-			<form method="GET" class="form" >
-			
-				<label for="description">Describe here the issue</label>
-				<textarea name="description" rows="10" cols="40" placeholder="Here you should describe the issue" required></textarea>
-				<label for="report-image">Provide us with an image to better understand the problem</label>
-				<input type="file" name="report-image" accept="image/png, image/jpg">
-				<button type="submit">Submit Report</button>
-			</form>
+
 		</div>
-	</div>
-		
-	
+
+
 
 
 </body>
+
 </html>
-
-
-
-
-
-
-
-
-
