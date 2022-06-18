@@ -5,6 +5,10 @@ const { getEvents, getEventByID, createEvent, updateEvent,deleteEvent } = requir
 const { Register } = require("../Controllers/registerController");
 const { getToken } = require("../Controllers/token");
 const { UserToken } = require("../Controllers/authentificate");
+const { getZone } = require("../Controllers/ZonaController");
+const { getCartiere } = require("../Controllers/CartierController");
+const { getPubele } = require("../Controllers/PubelaController");
+const { createRequest } = require("../Controllers/CereriController");
 
 const allRoutes = {
     'auth':function(req,res){
@@ -12,6 +16,14 @@ const allRoutes = {
     },
     'token':function(req,res){
         getToken(req,res);
+    },
+    'js':function(req,res){
+        var jsPath = path.join(__dirname,'..','..',req.url);
+        var fileStream = fs.createReadStream(jsPath);
+        res.statusCode = 200;
+        res.setHeader('Cache-control', 'public, max-age=300000');
+        res.setHeader('Content-Type', 'text/javascript');
+        fileStream.pipe(res);
     },
     'html': function (req, res) {
         var file=req.url.split("/");
@@ -25,6 +37,7 @@ const allRoutes = {
         var jpgPath = path.join(__dirname,'..','..',req.url);
         var fileStream = fs.createReadStream(jpgPath);
         res.statusCode = 200;
+        res.setHeader('Cache-control', 'public, max-age=300000');
         res.setHeader('Content-Type', 'text/jpg');
         fileStream.pipe(res);
     },
@@ -32,6 +45,7 @@ const allRoutes = {
         var pngPath = path.join(__dirname,'..','..', req.url);
         var fileStream = fs.createReadStream(pngPath);
         res.statusCode = 200;
+        res.setHeader('Cache-control', 'public, max-age=300000');
         res.setHeader('Content-Type', 'text/png');
         fileStream.pipe(res);
     },
@@ -64,6 +78,19 @@ const allRoutes = {
     },
     '/api/Register': function(req,res){
         Register(req,res);
+    },
+    'api/Zone':function(req,res){
+        getZone(req,res);
+    },
+    'api/Cartiere':function(req,res){
+        getCartiere(req,res);
+    },
+    'api/Pubele':function(req,res){
+        getPubele(req,res);
+    },
+    'api/Cerere':function(req,res){
+        
+        createRequest(req,res);
     },
     default: (req, res) => {
         res.writeHead(404, { "Content-Type": "text/html" });

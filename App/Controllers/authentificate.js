@@ -4,15 +4,8 @@ const { decryptWithPrivateKey } = require('../Crypto/decrypt');
 const { readPvKey } = require('../Crypto/KeyRead');
 const { selectSuperUsers } = require('../Models/SuperUserModel');
 const { selectUsers } = require('../Models/UserModel');
+const {hex_to_ascii} =require('../API/parser');
 
-function hex_to_ascii(str1) {
-    var hex = str1.toString();
-    var str = '';
-    for (var n = 0; n < hex.length; n += 2) {
-        str += String.fromCharCode(parseInt(hex.substr(n, 2), 16));
-    }
-    return str;
-}
 
 function containCredentials(credentials, users, superUsers) {
         

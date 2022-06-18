@@ -1,27 +1,38 @@
-const {   selectCartByID, deleteCart, createCart } = require("../Models/CartierModel");
+const {   selectCartByID, deleteCart, createCart, selectCart } = require("../Models/CartierModel");
 async function createCartier(req,res){
     try{
-        const event= await createCart(req);
+        const Cartiere= await createCart(req);
         res.writeHead(200,{'Content-Type': 'application/json'});
-        res.end(JSON.stringify(event.rows.at(0)));
+        res.end(JSON.stringify(Cartiere.rows.at(0)));
     }catch(err){
         console.log(err.message);
     }
 }
 async function deleteCartier(req,res,id){
     try{
-        const event=await deleteCart(id);
+        const Cartiere=await deleteCart(id);
         res.writeHead(200,{'Content-Type': 'application/json'});
-        res.end(JSON.stringify(event.rows.at(0)));
+        res.end(JSON.stringify(Cartiere.rows.at(0)));
     }catch(err){
         console.log(err.message);
     }
 }
 async function getCartierByID(req,res,id){
     try{
-        const event= await selectCartByID(id);
+        const Cartiere= await selectCartByID(id);
         res.writeHead(200,{'Content-Type': 'application/json'});
-        res.end(JSON.stringify(event.rows.at(0)));
+        res.end(JSON.stringify(Cartiere.rows.at(0)));
+    }catch(err){
+        console.log(err.message);
+    }
+}
+async function getCartiere(req,res){
+    try{
+        const Cartiere= await selectCart();
+        res.writeHead(200, {'Content-Type': 'application/json'})
+       
+        res.end(JSON.stringify(Cartiere.rows.at(0)));
+
     }catch(err){
         console.log(err.message);
     }
@@ -29,5 +40,6 @@ async function getCartierByID(req,res,id){
 module.exports={
     createCartier,
     deleteCartier,
-    getCartierByID
+    getCartierByID,
+    getCartiere
 }

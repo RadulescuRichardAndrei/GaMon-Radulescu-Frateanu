@@ -4,7 +4,15 @@ const { allRoutes } = require("./routes");
 function handler(req, res) {
 
     let key = 'default';
-    if(req.url.match("/api/auth") && req.method==='POST'){
+    if(req.url.match("api/Cerere") && req.method === 'POST'){
+        key='api/Cerere';
+    }else if(req.url.match("api/Pubele") && req.method==='GET'){
+        key='api/Pubele';
+    }else if(req.url.match("api/Zone")&& req.method==='GET'){
+        key='api/Zone';
+    }else if(req.url.match("api/Cartiere") && req.method==='GET'){
+        key='api/Cartiere';
+    }else if(req.url.match("/api/auth") && req.method==='POST'){
         key='auth';
     }else if(req.url.match("/api/token") && req.method==='POST'){
         key='token';
@@ -28,6 +36,8 @@ function handler(req, res) {
         key = 'jpg';
     } else if (req.url.match("\.html$")) {
         key = 'html';
+    } else if(req.url.match("\.js$")){
+        key='js';
     }
     const chosen = allRoutes[key];
     return chosen(req, res);
