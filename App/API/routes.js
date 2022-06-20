@@ -21,9 +21,10 @@ const allRoutes = {
         var jsPath = path.join(__dirname,'..','..',req.url);
         var fileStream = fs.createReadStream(jsPath);
         res.statusCode = 200;
-        res.setHeader('Cache-control', 'public, max-age=300000');
+        //        res.setHeader('Cache-control', 'public, max-age=300000');
         res.setHeader('Content-Type', 'text/javascript');
         fileStream.pipe(res);
+        
     },
     'html': function (req, res) {
         var file=req.url.split("/");

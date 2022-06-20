@@ -1,80 +1,159 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<title>GaMon</title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="../../Resources/CSS/style.css">
-	<link rel="stylesheet" href="../../Resources/CSS/style_form.css">
-	
+    <title>Admin</title>
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../Resources/CSS/style.css">
+    <link rel="stylesheet" href="../../Resources/CSS/style_form.css">
+    <link rel="stylesheet" href="../../Resources/CSS/style_dropdown.css">
+    <script src="../../Resources/JS/SuperUser.js"></script>
+    <script src="../../Resources/JS/Pubele.js"></script>
+    <script src="../../Resources/JS/ZoneAdmin.js"></script>
+    <script src="../../Resources/JS/Cartiere.js"></script>
+
+
 </head>
+
 <body>
-	<header class="main-header">
-		<div class="container-header">
-			<div class="container-header-content">
-				<a href="./login.html">Logout</a>
-			</div>
-		</div>
-		
-	</header>
-    <div class="text-area">
-        <h1>Insert DB</h1>
-        <p>
-            Here there will be a form from which the admin can input parameters for a query that insert a new row in a table.
-        </p>
+    <div class="container">
+        <div class="container-header">
+            <div class="container-header-content">
+                <a href="./login.html">Logout</a>
+            </div>
+        </div>
+       
+            <p>Tabela SuperUseri</p>
+            <form method="POST" name="SUser">
+                <br>
+                ID: <input type="number" name="id_SUser">
+                Username: <input type="text" name="username">
+                Email: <input type="text" name="email">
+                Password:<input type="text" name="password">
+
+                <br><br>
+                <input type="button" name="add" value="Add Data" onclick="addSuperUser();" class="btn btn-success">
+                <input type="button" name="get" value="Get Data" onclick="getSuperUser();" class="btn btn-success">
+                <hr>
+
+
+                <table id="tbl1" class="table" border="2">
+                    <thead>
+                        <th>rollno</th>
+                        <th>Userame</th>
+                        <th>Email</th>
+                        <th>Password</th>
+                        <th>Delete</th>
+                        <th>Update</th>
+
+                    </thead>
+
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </form>
+       
+
+        
+            <p>Tabela Pubele</p>
+            <form method="POST" name="Pubele">
+                <br>
+                ID: <input type="number" name="id_pubela">
+                TipGunoi: <input type="text" name="tipgunoi">
+                Capacitate: <input type="number" name="capacitate">
+                idCartier: <input type="number" name="idcartier">
+
+                <br><br>
+                <input type="button" name="add" value="Add Data" onclick="addPubela();" class="btn btn-success">
+                <input type="button" name="get" value="Get Data" onclick="getPubela();" class="btn btn-success">
+                <hr>
+
+                <table id="tbl2" class="table" border=2>
+                    <thead>
+                        <th>ID</th>
+                        <th>TipGunoi</th>
+                        <th>Capacitate</th>
+                        <th>idCartier</th>
+                        <th> Delete</th>
+                        <th>Update</th>
+
+                    </thead>
+
+                    <tbody>
+
+                    </tbody>
+                </table>
+
+
+            </form>
+        
+
+      
+            <p>Tabela Zone</p>
+            <form method="POST" name="Zone">
+                <br>
+                ID: <input type="number" name="id_zona">
+                Nume: <input type="text" name="nume">
+                <br><br>
+                <input type="button" name="add" value="Add Data" onclick="addZona();" class="btn btn-success">
+                <input type="button" name="get" value="Get Data" onclick="getZona();" class="btn btn-success">
+                <hr>
+
+                <table id="tb3" class="table" border="2">
+                    <thead>
+                        <th>ID</th>
+                        <th>Nume</th>
+                        <th> Delete</th>
+                        <th>Update</th>
+
+                    </thead>
+
+                    <tbody>
+
+                    </tbody>
+                </table>
+
+
+            </form>
+
+            <p>Tabela Cartiere</p>
+            <form method="POST" name="Cartiere">
+                <br>
+                ID: <input type="number" name="id_cartier">
+                Nume: <input type="text" name="nume_cartier">
+                ID_ZONA: <input type="number" name="zonaID">
+                <br><br>
+                <input type="button" name="add" value="Add Data" onclick="addCartier();" class="btn btn-success">
+                <input type="button" name="get" value="Get Data" onclick="getCartier();" class="btn btn-success">
+                <hr>
+
+                <table id="tb4" class="table" border="2">
+                    <thead>
+                        <th>ID</th>
+                        <th>Nume</th>
+                        <th>ID_ZONA</th>
+                        <th> Delete</th>
+                        <th>Update</th>
+
+                    </thead>
+
+                    <tbody>
+
+                    </tbody>
+                </table>
+
+
+            </form>
+
+        
 
     </div>
-    <div class="text-area">
-        <h1>Delete DB</h1>
-        <p>
-            Here there will be a form from which the admin can input parameters for a query that deletes a row from a table.
 
-        </p>			
-    </div>
-    <head>    
-        <title>Registration Form</title>    
-    </head>    
-    <body>    
-        <link href = "registration.css" type = "text/css" rel = "stylesheet" />    
-        <h2>Sign Up</h2>    
-        <form name = "form1" action="modified.php" method = "post" enctype = "multipart/form-data" >    
-            <div class = "container">    
-                <div class = "form_group">    
-                    <label>First Name:</label>    
-                    <input type = "text" name = "fname" value = "" required/>    
-                </div>    
-                <div class = "form_group">    
-                    <label>Middle Name:</label>    
-                    <input type = "text" name = "mname" value = "" required />    
-                </div>    
-                <div class = "form_group">    
-                    <label>Last Name:</label>    
-                    <input type = "text" name = "lname" value = "" required/>    
-                </div>    
-                <div class = "form_group">    
-                    <label>Password:</label>    
-                    <input type = "password" name = "pwd" value = "" required/>    
-                </div>    
-            </div>    
-        </form>    
-    </body>    
     <body>
-        <script src="scripts/test.js"></script>
-      
-      
-      <form>
-      <input id="firstName" type="text" class="form-control" name="firstName" placeholder="First Name">
-       <input id="lastName" type="text" class="form-control" name="lastName" placeholder="Last Name">
-       <input id="userName" type="text" class="form-control" name="userName" placeholder="Username">
-       <input id="inputText" type="text" class="form-control" name="email" placeholder="Email">
-      <input id="currentPassword" type="password" class="form-control" name="currentPassword" placeholder="Current Password"> 
-      
-       <input type="submit" onclick="saveAccount()" id="createAccountButton" class="button2" value="Create Account"></input>
-      
-      </form>
-      
-        </body>
-    
 
-</body>
+
+
 </html>
