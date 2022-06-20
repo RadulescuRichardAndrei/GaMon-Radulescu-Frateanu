@@ -1,4 +1,22 @@
-const {  selectPubByID, updatePubA, updatePubU, deletePub, createPub, selectPub } = require("../Models/PubelaModel");
+const {  selectPubByID, updatePubA, updatePubU, deletePub, createPub, selectPub, updateStatusPub } = require("../Models/PubelaModel");
+
+async function changeStatusPubela(req,res){
+    try{
+        buf='';
+        req.on('data',(data)=>{
+            buf+= data.toString();
+        })
+        req.on('end',async function(){
+            
+            const data=JSON.parse(buf);
+            updateStatusPub(data.id,data.status);
+            res.writeHead(204,{'Content-Type': 'application/json'});
+        })
+        
+    }catch(err){
+        console.log(err.message);
+    }
+}
 
 async function createPubela(req,res){
     try{
@@ -13,7 +31,7 @@ async function deletePubela(req,res,id){
     try{
         const event=await deletePub(id);
         res.writeHead(200,{'Content-Type': 'application/json'});
-        res.end(JSON.stringify(event.rows.at(0)));
+        res.end();
     }catch(err){
         console.log(err.message);
     }
@@ -21,8 +39,8 @@ async function deletePubela(req,res,id){
 async function updatePubelaA(req,res,id){
     try{
         const event=await updatePubA(id,req);
-        res.writeHead(200,{'Content-Type': 'application/json'});
-        res.end(JSON.stringify(event.rows.at(0)));
+        res.writeHead(204,{'Content-Type': 'application/json'});
+        res.end();
     }catch(err){
         console.log(err.message);
     }
@@ -30,8 +48,8 @@ async function updatePubelaA(req,res,id){
 async function updatePubelaU(req,res,id){
     try{
         const event=await updatePubU(id,req);
-        res.writeHead(200,{'Content-Type': 'application/json'});
-        res.end(JSON.stringify(event.rows.at(0)));
+        res.writeHead(204,{'Content-Type': 'application/json'});
+        res.end();
     }catch(err){
         console.log(err.message);
     }
@@ -60,5 +78,6 @@ module.exports={
     updatePubelaU,
     getPubelaByID,
     deletePubela,
-    getPubele
+    getPubele,
+    changeStatusPubela
 }

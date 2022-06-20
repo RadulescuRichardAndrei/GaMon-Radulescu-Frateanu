@@ -9,6 +9,8 @@
 	<link rel="stylesheet" href="../../Resources/CSS/style_dropdown.css">
 	<link rel="stylesheet" href="../../Resources/CSS/style_form.css">
 	<script src="../../Resources/JS/zone.js"></script>
+	<script src="../../Resources/JS/Cereri.js"></script>
+	<script src="../../Resources/JS/Report.js"></script>
 	
 	<script src="../../Resources/JS/addGarbage.js"></script>
 </head>
@@ -52,8 +54,8 @@
 
 
 	<div class="container-text-area">
-		<div id="Garbage_History"></div>
-
+		
+		<div id="Req"></div>
 		<div class="text-area">
 			<h1>Add garbage</h1>
 			<div id="form-garbage-request-div">
@@ -63,18 +65,42 @@
 				</form>
 			</div>
 		</div>
+		<div id="Garbage_History"></div>
+		<div class="text-area">
+			<h1>Garbage History</h1>
+			<form onsubmit="RequestsHistory(event)">
+				<input type="submit" name="Refresh" value="Refresh">
+			</form>
+			<div id="table-requests"></div>
 
-		<div id="Req"></div>
+		</div>
+		
 		<div class="text-area">
 
 		</div>
 
 		<div id="Report"></div>
 		<div class="text-area">
+			<h1>Report littering</h1>
+
+			<div>
+				<iframe name="dummyF" id="dummyF" style="display: none;"></iframe>
+				<form method="POST" action="api/makeReport" enctype="multipart/form-data" target="dummyF" >
+					<label for="description">Description</label>
+					<input type="text" name="description">
+					<label for="image-upload">Image</label>
+					<input type="file" name="image-upload" accept=".png,.jpg,.jpeg">
+					<input type="submit">
+				</form>
+				
+
+			</div>
+
 
 		</div>
-
-
+	</div>
+		
+	
 
 
 </body>

@@ -59,7 +59,6 @@ async function selectPubele(){
         
         const formPubele=document.createElement('form');
         formPubele.setAttribute('id','form-pubele')
-        //formPubele.setAttribute('method', 'POST');
         formPubele.setAttribute('onsubmit', 'creareCerere(event)');
         formPubele.classList.add("form");
 
@@ -79,6 +78,12 @@ async function selectPubele(){
             }
 
         formPubele.appendChild(pubeleSelect);
+
+        const buttonReport=document.createElement('button');
+        buttonReport.setAttribute('onclick','GarbageIsFull(event)');
+        buttonReport.appendChild(document.createTextNode('Report Bin as full'));
+        formPubele.appendChild(buttonReport);
+        
         
         const labelCantitate = document.createElement('label');
         labelCantitate.setAttribute('for', 'cantitate-gunoi');

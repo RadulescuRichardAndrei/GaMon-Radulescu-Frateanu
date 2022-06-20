@@ -11,7 +11,7 @@ function genKeyPair(){
         },
         privateKeyEncoding:{
             type: 'pkcs1',
-            format:'pem'
+            format:'pem',
         }
     });
    

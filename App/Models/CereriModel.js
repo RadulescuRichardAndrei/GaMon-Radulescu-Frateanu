@@ -82,6 +82,21 @@ async function selectReqByID(id) {
     })
 }
 
+async function selectReqByUserID(id) {
+    return new Promise((resolve, reject) => {
+        try {
+            
+            const requests = pool.query(
+                `select json_agg(t) from (select * from "Cereri" where "idUser"=${id}) t`
+            );
+            
+            resolve(requests);
+            console.log(err.message);
+        } catch (err) {
+            reject(err);
+        }
+    })
+}
 
 
 module.exports = {
@@ -89,5 +104,6 @@ module.exports = {
     selectReqByID,
     createReq,
     deleteReq,
-    updateReq
+    updateReq,
+    selectReqByUserID
 }

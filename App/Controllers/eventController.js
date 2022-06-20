@@ -33,8 +33,8 @@ async function createEvent(req,res){
 async function updateEvent(req,res,id){
     try{
         const event=await updateEv(id,req);
-        res.writeHead(200,{'Content-Type': 'application/json'});
-        res.end(JSON.stringify(event.rows.at(0)));
+        res.writeHead(204,{'Content-Type': 'application/json'});
+        res.end();
     }catch(err){
         console.log(err.message);
     }

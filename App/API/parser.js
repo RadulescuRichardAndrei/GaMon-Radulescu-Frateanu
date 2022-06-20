@@ -8,16 +8,19 @@ function hex_to_ascii(str1) {
 }
 
 
-function parserUser(string){
-    const arr=string.split(/=|&/);
-    var user={'email': arr[1],
-    'username':arr[3],
-    'password':arr[5]
+function parserUser(string) {
+    const arr = string.split(/=|&/);
+    var user = {
+        'email': arr[1],
+        'username': arr[3],
+        'password': arr[5]
+    }
+    return user;
+
 }
-return user;
-    
-}
-module.exports={
+
+
+module.exports = {
     parserUser,
     hex_to_ascii
 }

@@ -4,9 +4,8 @@ const { handler } = require('./App/API/handler');
 const genKey= require("./App/Crypto/createKeypair");
 
 
-genKey.genKeyPair();
+//genKey.genKeyPair();
 const PORT = process.env.PORT || 5000;
-
 
 
 const server= http.createServer(
