@@ -28,7 +28,7 @@ async function deletePub(id) {
     })
 
 }
-//UpdateAdm
+//Update
 async function updatePubA(id, req) {
     return new Promise((resolve, reject) => {
         try {
@@ -54,7 +54,7 @@ async function updateStatusPub(id,status){
         }
     })
 }
-//UpdateUsr
+
 async function updatePubU(id, req) {
     return new Promise((resolve, reject) => {
         try {
