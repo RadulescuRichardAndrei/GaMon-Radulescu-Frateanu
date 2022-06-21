@@ -32,12 +32,15 @@ async function deleteEv(id) {
 
 }
 //Update
-async function updateEv(id, req) {
+async function updateEv(event) {
     return new Promise((resolve, reject) => {
         try {
-            const { newId, descriere, image } = req.body;
+            const data=JSON.parse(event);
+            
+            
             const updatedEvent = pool.query(
-                `update "Evenimente" set "ID"=$1, "descriere"=$2, "image"=$3 where "id"=${id};`, [newId, descriere, image]
+                `update "Evenimente" set  "descriere"=$1, "image"=$2, "nume"=$3 where "ID"=$4;`,
+                 [data.descriere, data.image, data.nume, data.id]
             )
             resolve(updatedEvent);
         } catch (err) {

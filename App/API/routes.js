@@ -90,9 +90,8 @@ const allRoutes = {
         createEvent(req, res);
     },
     '/api/updateEvent': function (req, res) {
-        const arr= req.url.split('/');
-        const id =arr[arr.length-1];
-        updateEvent(req, res, id);
+    
+        updateEvent(req, res);
     },
     '/api/deleteEvent': function (req, res) {
         const arr= req.url.split('/');
@@ -134,6 +133,9 @@ const allRoutes = {
         const id =arr[arr.length-1];
         deleteReport(req, res, id);
     },    
+    'api/generateHtml': function(req,res){
+        RequestsHtmlFile(req,res);
+    },
     default: (req, res) => {
         res.writeHead(404, { "Content-Type": "text/html" });
         res.end("No Page Found");

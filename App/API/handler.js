@@ -4,7 +4,9 @@ const { allRoutes } = require("./routes");
 function handler(req, res) {
 
     let key = 'default';
-    if(req.url.match('api/Reports') && req.method === 'GET'){
+    if(req.url.match('api/generateHtml') && req.method === 'POST'){
+        key='api/generateHtml';
+    }else if(req.url.match('api/Reports') && req.method === 'GET'){
         key='api/Reports';
     }else if(req.url.match(/\/api\/Reports\/([0-9]+)/) && req.method === 'DELETE'){
         key='api/deleteReport';
@@ -30,7 +32,7 @@ function handler(req, res) {
         key = 'token';
     } else if (req.url.match("/api/Register") && req.method === 'POST') {
         key = '/api/Register';
-    } if (req.url.match(/\/api\/Events\/([0-9]+)/) && req.method === 'PUT') {
+    } if (req.url.match('/api/updateEvents/') && req.method === 'POST') {
         key = '/api/updateEvent';
     } if (req.url.match(/\/api\/Events\/([0-9]+)/) && req.method === 'DELETE') {
         key = '/api/deleteEvent';
@@ -53,7 +55,6 @@ function handler(req, res) {
     }else if( req.url.match("\.ico$")){
         key='ico';
     }
-    console.log(req.url);
     const chosen = allRoutes[key];
     return chosen(req, res);
 }

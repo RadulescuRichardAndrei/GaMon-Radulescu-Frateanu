@@ -98,6 +98,31 @@ async function selectReqByUserID(id) {
     })
 }
 
+async function selectDataForReport(intervalDays){
+    return new Promise((resolve, reject) => {
+        try {
+            
+            const requests = pool.query(
+               `select current_date - $1 as "from", current_date "to",
+               Sum("Cereri"."cantitate"),"Cereri"."tipGunoi",
+               "Cartiere"."ID" as "idCartier","Cartiere"."Nume" as "numeCartier",
+               "Zone"."ID" as "idZona", "Zone"."Nume" as "numeZona"  from "Cereri" Join "Pubele" 
+               on "Cereri"."idPubela"="Pubele"."ID" and
+               "Cereri"."dataCerere" BETWEEN current_date - $1 and current_date
+               JOIN "Cartiere" on "Pubele"."idCartier"="Cartiere"."ID"
+               Join "Zone" on "Cartiere"."idZona"="Zone"."ID"
+               group by( "Zone"."ID", "Cartiere"."ID","Cereri"."tipGunoi")
+               order by ("Cartiere"."Nume") asc, (Sum("Cereri"."cantitate")) asc`,
+               [intervalDays]
+            );
+            
+            resolve(requests);
+            console.log(err.message);
+        } catch (err) {
+            reject(err);
+        }
+    })
+}
 
 module.exports = {
     selectReq,
@@ -105,5 +130,6 @@ module.exports = {
     createReq,
     deleteReq,
     updateReq,
-    selectReqByUserID
+    selectReqByUserID,
+    selectDataForReport
 }
