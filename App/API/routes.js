@@ -25,6 +25,7 @@ const allRoutes = {
         // res.setHeader('Cache-control', 'public, max-age=300000');
         res.setHeader('Content-Type', 'text/javascript');
         fileStream.pipe(res);
+        
     },
     'html': async function (req, res) {
         var credential = await goodCredentials(req);
