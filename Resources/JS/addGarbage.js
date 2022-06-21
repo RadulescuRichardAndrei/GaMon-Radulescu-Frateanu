@@ -18,11 +18,9 @@ function createGunoi(type,parent,value){
     parent.appendChild(optionGunoi);
 }
 async function creareCerere(event){
-    console.log("ceva");
     event.preventDefault();
     const pubID=document.getElementById('pubele').value;
     const cant=document.getElementById('cantitate-gunoi').value;
-
 
     fetch('api/Cerere',{
         method:'POST',

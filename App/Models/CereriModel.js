@@ -101,20 +101,24 @@ async function selectReqByUserID(id) {
 async function selectDataForReport(intervalDays){
     return new Promise((resolve, reject) => {
         try {
+
+            var day= parseInt(intervalDays);
             
             const requests = pool.query(
-               `select current_date - $1 as "from", current_date "to",
+               `select json_agg(t) from 
+               (select current_date - $1 as "from", current_date "to",
                Sum("Cereri"."cantitate"),"Cereri"."tipGunoi",
                "Cartiere"."ID" as "idCartier","Cartiere"."Nume" as "numeCartier",
                "Zone"."ID" as "idZona", "Zone"."Nume" as "numeZona"  from "Cereri" Join "Pubele" 
                on "Cereri"."idPubela"="Pubele"."ID" and
-               "Cereri"."dataCerere" BETWEEN current_date - $1 and current_date
+               current_date - "Cereri"."dataCerere" <= $1 
                JOIN "Cartiere" on "Pubele"."idCartier"="Cartiere"."ID"
                Join "Zone" on "Cartiere"."idZona"="Zone"."ID"
                group by( "Zone"."ID", "Cartiere"."ID","Cereri"."tipGunoi")
-               order by ("Cartiere"."Nume") asc, (Sum("Cereri"."cantitate")) asc`,
-               [intervalDays]
+               order by ("Cartiere"."Nume") asc, (Sum("Cereri"."cantitate")) asc) t`,
+               [day]
             );
+
             
             resolve(requests);
             console.log(err.message);

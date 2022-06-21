@@ -13,6 +13,7 @@
 	<script src="../../Resources/JS/Events_SupUs.js"></script>
 	<script src="../../Resources/JS/Reports_SupUs.js"></script>
 	<script src="../../Resources/JS/Report.js"></script>
+	<script src="../../Resources/JS/FileDownloader.js"></script>
 
 </head>
 <body>
@@ -42,14 +43,20 @@
 
 	<div class="container-text-area">
 		<div class="text-area">
-			<form onsubmit="requestHtml(event)">
+			<form class="form" onsubmit="requestHtml(event)">
 				<label >Time interval</label>
 				<select id="selected-interval">
 					<option value="1" name="last-day" selected>Last day</option>
 					<option value="7" name="last-week">Last week</option>
 					<option value="30" name="last-month">Last month</option>
 				</select>
-				<input type="submit" name="submit">
+				<input type="submit" name="submit" value="Download HTML">
+			</form>
+			<form class="form" onsubmit="requestCSV(event)">
+				<input type="submit" name="submit" value="Download CSV">
+			</form>
+			<form class="form" onsubmit="requestPDF(event)">
+				<input type="submit" name="submit" value="Download PDF">
 			</form>
 
 		</div>
@@ -87,13 +94,14 @@
 				<input type="submit" name="submit" value="delete">
 
 			</form>
+			
 		</div>
 		<div class="text-area">
 			<h1>Event Update</h1>
 			
 			<form method="POST" class="form" action="/api/updateEvents/" enctype="multipart/form-data" target="dummyF">
 				<label for="event-id-update">Event ID</label>
-				<input type="text" id="event-id-update" for="event-id-update" name="event-id-update" required>
+				<input type="text" id="event-id-update" name="event-id-update" required>
 				<label for="event-name-update">Event new Name</label>			
 				<input type="text" id="event-name-update" name="event-name" required>
 				<label for="description-update">Event new description</label>

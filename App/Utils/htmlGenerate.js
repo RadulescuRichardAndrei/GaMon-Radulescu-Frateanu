@@ -59,3 +59,9 @@ ${table}
 
 </html>
 `
+
+module.exports={
+  createRow,
+  createTable,
+  createHtml
+}
