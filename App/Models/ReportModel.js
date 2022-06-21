@@ -1,12 +1,17 @@
 const pool = require("../API/database");
+const { randomId } = require("../Crypto/crypto-Utils");
 //Create
-async function createRep(req) {
+
+
+async function createRep(input) {
     return new Promise((resolve, reject) => {
         try {
-            const { id, descriere, image, idUser } = req.body;
+            const data=JSON.parse(input);
+            const id=randomId();
+            
             const newReport = pool.query(
-                `Insert into "Report"("ID", "descriere", "image", "idUser") Values($1,$2,$3,$4) Returning *;`,
-                [id, descriere, image, idUser]
+                `Insert into "Report"("ID", "descriere", "image", "imageType", "idUser") Values($1,$2,$3,$4,$5) Returning *;`,
+                [id, data.descriere, data.image,data.imageType, data.userID]
             );
             resolve(newReport);
         } catch (err) {
@@ -33,8 +38,7 @@ async function selectRep() {
     return new Promise((resolve, reject) => {
         try {
             const Reports = pool.query(
-                `select json_agg(t) from (Select "ID","descriere",
-               "image" from "Report") t;`
+                `select json_agg(t) from (Select * from "Report") t;`
             )
             resolve(Reports);
         } catch (err) {

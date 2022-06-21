@@ -3,13 +3,13 @@ const pool = require("../API/database");
 
 
 //Create
-async function createEv(req) {
+async function createEv(rawData) {
     return new Promise((resolve, reject) => {
         try {
-            const { id, descriere, image, idSuperUser } = req.body;
+            const data= JSON.parse(rawData);
             const newEvent = pool.query(
-                `Insert into "Evenimente"("ID", "descriere", "image", "idSuperUser") Values($1,$2,$3,$4) Returning *;`,
-                [id, descriere, image, idSuperUser]
+                `Insert into "Evenimente"("ID", "descriere", "image", "idSuperUser", "nume") Values($1,$2,$3,$4,$5) Returning *;`,
+                [data.id, data.descriere, data.image, data.idSuperUser,data.nume]
             );
             resolve(newEvent);
         } catch (err) {
@@ -22,7 +22,7 @@ async function deleteEv(id) {
     return new Promise((resolve, reject) => {
         try {
             const deletedEvent = pool.query(
-                `delete from "Evenimente" where "id"=${id};`,
+                `delete from "Evenimente" where "ID"=${id};`,
             );
             resolve();
         } catch (err) {
@@ -32,12 +32,15 @@ async function deleteEv(id) {
 
 }
 //Update
-async function updateEv(id, req) {
+async function updateEv(event) {
     return new Promise((resolve, reject) => {
         try {
-            const { newId, descriere, image } = req.body;
+            const data=JSON.parse(event);
+            
+            
             const updatedEvent = pool.query(
-                `update "Evenimente" set "ID"=$1, "descriere"=$2, "image"=$3 where "id"=${id};`, [newId, descriere, image]
+                `update "Evenimente" set  "descriere"=$1, "image"=$2, "nume"=$3 where "ID"=$4;`,
+                 [data.descriere, data.image, data.nume, data.id]
             )
             resolve(updatedEvent);
         } catch (err) {
@@ -52,8 +55,7 @@ async function selectEv() {
     return new Promise((resolve, reject) => {
         try {
             const Events = pool.query(
-                `select json_agg(t) from (Select "nume","descriere",
-               "image" from "Evenimente") t;`
+                `select json_agg(t) from (Select * from "Evenimente") t;`
             )
             resolve(Events);
         } catch (err) {

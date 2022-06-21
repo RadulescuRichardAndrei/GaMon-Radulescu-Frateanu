@@ -10,7 +10,6 @@ async function createUser(user) {
 
             const hash=hashPassword(user.password);
             const id=randomId();
-            console.log(id);
 
             const newUser = pool.query(
                 `Insert into "Useri"("ID", "username", "email", "passwordHash", "passwordSalt") Values($1,$2,$3,$4,$5) Returning *;`,

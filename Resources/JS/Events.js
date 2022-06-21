@@ -21,12 +21,12 @@ fetch(url).then((response)=>{
 
         const eventDesc= document.createElement('p');
         eventDesc.textContent=data.json_agg.at(i).descriere;
-        
+        /*
         if(data.json_agg.at(i).image !== null){
             const img= document.createElement('img');
             img.src= 'data:image/jpeg;base64,'  + hexToBase64(data.json_agg.at(i).image);
             eventItem.append(img);
-        }
+        }*/
 
         eventItem.append(eventTitle,eventDesc);
         root.append(eventItem);
