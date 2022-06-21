@@ -7,9 +7,9 @@ const { getToken } = require("../Controllers/token");
 const { UserToken, goodCredentials } = require("../Controllers/authentificate");
 const { getZone } = require("../Controllers/ZonaController");
 const { getCartiere } = require("../Controllers/CartierController");
-const { getPubele, changeStatusPubela } = require("../Controllers/PubelaController");
+const { getPubele, changeStatusPubela,getPubeleRaportat } = require("../Controllers/PubelaController");
 const { createRequest, getRequests } = require("../Controllers/CereriController");
-const { createReport } = require("../Controllers/ReportController");
+const { createReport, getReports, deleteReport } = require("../Controllers/ReportController");
 
 const allRoutes = {
     'auth': function (req, res) {
@@ -27,12 +27,13 @@ const allRoutes = {
         fileStream.pipe(res);
     },
     'html': async function (req, res) {
-        var credential = await goodCredentials(req, res);
-
-        if (req.url.match('user.html') && credential != 1) {
+        var credential = await goodCredentials(req);
+        
+        if (req.url.match('user.html')&& !req.url.match('superuser.html') && credential != 1) {
             res.writeHead(401);
             res.end();
         } else if (req.url.match('superuser.html') && credential != 2) {
+            
             res.writeHead(401);
             res.end();
         } else {
@@ -60,10 +61,19 @@ const allRoutes = {
         res.setHeader('Content-Type', 'text/png');
         fileStream.pipe(res);
     },
+    'ico':  function (req, res) {
+        var icoPath = path.join(__dirname, '..', '..', req.url);
+        var fileStream = fs.createReadStream(icoPath);
+        res.statusCode = 200;
+        res.setHeader('Cache-control', 'public, max-age=300000');
+        res.setHeader('Content-Type', 'image/x-icon');
+        fileStream.pipe(res);
+    },
     'css': function (req, res) {
         var cssPath = path.join(__dirname, '..', '..', req.url);
         var fileStream = fs.createReadStream(cssPath, "utf8");
         res.statusCode = 200;
+        res.setHeader('Cache-control', 'public, max-age=300000');
         res.setHeader('Content-Type', 'text/css');
         fileStream.pipe(res);
     },
@@ -71,8 +81,8 @@ const allRoutes = {
         getEvents(req, res);
     },
     '/api/getEventByID': function (req, res) {
-        const id = req.url.split('/')[4];
-
+        const arr= req.url.split('/');
+        const id =arr[arr.length-1];
         getEventByID(req, res, id);
 
     },
@@ -80,11 +90,13 @@ const allRoutes = {
         createEvent(req, res);
     },
     '/api/updateEvent': function (req, res) {
-        const id = req.url.split('/')[4];
+        const arr= req.url.split('/');
+        const id =arr[arr.length-1];
         updateEvent(req, res, id);
     },
     '/api/deleteEvent': function (req, res) {
-        const id = req.url.split('/')[4];
+        const arr= req.url.split('/');
+        const id =arr[arr.length-1];
         deleteEvent(req, res, id);
     },
     '/api/Register': function (req, res) {
@@ -108,9 +120,20 @@ const allRoutes = {
     'api/PubStatus': function (req, res) {
         changeStatusPubela(req, res);
     },
+    'api/getPubRaportat': function(req,res){
+        getPubeleRaportat(req,res);
+    },
     'api/makeReport': function(req,res){
         createReport(req,res);
     },
+    'api/Reports': function(req,res){
+        getReports(req,res);
+    },
+    'api/deleteReport': function(req,res){
+        const arr= req.url.split('/');
+        const id =arr[arr.length-1];
+        deleteReport(req, res, id);
+    },    
     default: (req, res) => {
         res.writeHead(404, { "Content-Type": "text/html" });
         res.end("No Page Found");

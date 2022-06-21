@@ -1,18 +1,32 @@
 const {   selectZonaByID, deletZona, creatZona, selectZone } = require("../Models/ZonaModel");
+const { goodCredentials } = require("./authentificate");
+
 async function createZona(req,res){
     try{
+        var credential = await goodCredentials(req);
+        if(credential != 4 ){
+            res.writeHead(403)
+            res.end();
+        }else{
         const zone= await creatZona(req);
         res.writeHead(200,{'Content-Type': 'application/json'});
         res.end(JSON.stringify(zone.rows.at(0)));
+        }
     }catch(err){
         console.log(err.message);
     }
 }
 async function deleteZona(req,res,id){
     try{
+        var credential = await goodCredentials(req);
+        if(credential != 4 ){
+            res.writeHead(403)
+            res.end();
+        }else{
         const zone=await deletZona(id);
         res.writeHead(200,{'Content-Type': 'application/json'});
         res.end(JSON.stringify(zone.rows.at(0)));
+        }
     }catch(err){
         console.log(err.message);
     }

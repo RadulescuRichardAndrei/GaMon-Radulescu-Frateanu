@@ -3,8 +3,8 @@ const { encryptWithPublicKey } = require("../Crypto/encrypt");
 const { readPbKey, readPvKey } = require("../Crypto/KeyRead");
 const { selectSuperUsers } = require('../Models/SuperUserModel');
 const { selectUsers } = require('../Models/UserModel');
-const {decryptWithPrivateKey} =require("../Crypto/decrypt");
-const {hex_to_ascii} =require('../API/parser');
+const { decryptWithPrivateKey } = require("../Crypto/decrypt");
+const { hex_to_ascii } = require('../API/parser');
 const cookie = require('cookie');
 async function getToken(req, res) {
 
@@ -32,12 +32,19 @@ async function getUserFromToken(req) {
     var credentials = JSON.parse(hex_to_ascii(credentialsHex));
 
     var users = (await selectUsers()).rows.at(0).json_agg;
+    var superUsers= (await selectSuperUsers()).rows.at(0).json_agg;
 
     for (var i = 0; i < users.length; i++)
         if (credentials.username.match(users[i].username)) {
             var password = hashPasswordSalt(credentials.password, users[i].passwordSalt)
             if (users[i].passwordHash.match(password))
                 return users[i];
+        }
+    for (var i = 0; i < superUsers.length; i++)
+        if (credentials.username.match(superUsers[i].username)) {
+            var password = hashPasswordSalt(credentials.password, superUsers[i].passwordSalt)
+            if (superUsers[i].passwordHash.match(password))
+                return superUsers[i];
         }
 
 }

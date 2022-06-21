@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
 	<title>GaMon</title>
@@ -8,6 +8,7 @@
 	<link rel="stylesheet" href="../../Resources/CSS/style.css">
 	<link rel="stylesheet" href="../../Resources/CSS/style_dropdown.css">
 	<link rel="stylesheet" href="../../Resources/CSS/style_form.css">
+	<link rel="icon" href="../../Resources/Images/icon.ico">
 	<script src="../../Resources/JS/zone.js"></script>
 	<script src="../../Resources/JS/Cereri.js"></script>
 	<script src="../../Resources/JS/Report.js"></script>
@@ -85,12 +86,12 @@
 
 			<div>
 				<iframe name="dummyF" id="dummyF" style="display: none;"></iframe>
-				<form method="POST" action="api/makeReport" enctype="multipart/form-data" target="dummyF" >
+				<form class="form" method="POST" action="api/makeReport" enctype="multipart/form-data" target="dummyF" >
 					<label for="description">Description</label>
-					<input type="text" name="description">
+					<input type="text" name="description"  id="description" rows="10" cols="40">
 					<label for="image-upload">Image</label>
-					<input type="file" name="image-upload" accept=".png,.jpg,.jpeg">
-					<input type="submit">
+					<input type="file" name="image-upload" id="image-upload" accept=".png,.jpg,.jpeg">
+					<input type="submit" value="submit">
 				</form>
 				
 

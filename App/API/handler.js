@@ -4,19 +4,25 @@ const { allRoutes } = require("./routes");
 function handler(req, res) {
 
     let key = 'default';
-    if (req.url.match("api/makeReport") && req.method === 'POST') {
+    if(req.url.match('api/Reports') && req.method === 'GET'){
+        key='api/Reports';
+    }else if(req.url.match(/\/api\/Reports\/([0-9]+)/) && req.method === 'DELETE'){
+        key='api/deleteReport';
+    }else if (req.url.match("/api/makeReport") && req.method === 'POST') {
         key = 'api/makeReport';
-    } else if (req.url.match("api/PubStatus") && req.method === 'PUT') {
+    } else if(req.url.match('/api/getPubRaportat') && req.method ==='GET'){
+        key='api/getPubRaportat';
+    }else if (req.url.match("/api/PubStatus") && req.method === 'PUT') {
         key = 'api/PubStatus';
-    } else if (req.url.match("api/Cerere") && req.method === 'GET') {
+    } else if (req.url.match("/api/Cerere") && req.method === 'GET') {
         key = 'api/getCerere';
-    } else if (req.url.match("api/Cerere") && req.method === 'POST') {
+    } else if (req.url.match("/api/Cerere") && req.method === 'POST') {
         key = 'api/Cerere';
-    } else if (req.url.match("api/Pubele") && req.method === 'GET') {
+    } else if (req.url.match("/api/Pubele") && req.method === 'GET') {
         key = 'api/Pubele';
-    } else if (req.url.match("api/Zone") && req.method === 'GET') {
+    } else if (req.url.match("/api/Zone") && req.method === 'GET') {
         key = 'api/Zone';
-    } else if (req.url.match("api/Cartiere") && req.method === 'GET') {
+    } else if (req.url.match("/api/Cartiere") && req.method === 'GET') {
         key = 'api/Cartiere';
     } else if (req.url.match("/api/auth") && req.method === 'POST') {
         key = 'auth';
@@ -44,7 +50,10 @@ function handler(req, res) {
         key = 'html';
     } else if (req.url.match("\.js$")) {
         key = 'js';
+    }else if( req.url.match("\.ico$")){
+        key='ico';
     }
+    console.log(req.url);
     const chosen = allRoutes[key];
     return chosen(req, res);
 }

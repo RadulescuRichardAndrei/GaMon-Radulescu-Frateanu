@@ -83,6 +83,22 @@ async function selectPubByID(id) {
         }
     })
 }
+async function selectPubByStare(){
+    return new Promise((resolve, reject) => {
+        try {
+            const pub = pool.query(
+                `select json_agg(t) from (select "Pubele"."ID", "Pubele"."cantitate", "Cartiere"."Nume" 
+                as "cart", "Zone"."Nume" as "zn" from "Pubele" Join "Cartiere"
+    ON "Pubele"."idCartier"="Cartiere"."ID" and "Pubele"."raportat" JOIN "Zone"
+    ON "Cartiere"."idZona"="Zone"."ID") t`
+            )
+            resolve(pub);
+        } catch (err) {
+            reject(err);
+        }
+    })
+}
+
 async function selectPub(){
     return new Promise((resolve, reject) => {
         try {
@@ -103,5 +119,6 @@ module.exports = {
     deletePub,
     createPub,
     selectPub,
-    updateStatusPub
+    updateStatusPub,
+    selectPubByStare
 }

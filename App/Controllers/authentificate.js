@@ -25,7 +25,7 @@ function containCredentials(credentials, users, superUsers) {
     return 0;
 
 }
-async function goodCredentials(req, res) {
+async function goodCredentials(req) {
 
     var cookies = cookie.parse(req.headers.cookie || '');
     var mykey = await readPvKey();
@@ -56,7 +56,7 @@ async function UserToken(req, res) {
 
         var users = (await selectUsers()).rows.at(0).json_agg;
         var superUsers = (await selectSuperUsers()).rows.at(0).json_agg;
-
+        
         switch (containCredentials(credentials, users, superUsers)) {
             case 0:
                 res.writeHead(401)
