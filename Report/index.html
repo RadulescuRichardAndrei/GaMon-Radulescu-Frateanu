@@ -59,6 +59,7 @@
             		<li> <a href="#administration_of_database"> 3.1 Administration of database via the administration page </a></li>
             		<li> <a href="#searching"> 3.2 Getting results from the database </a> 	</li>
             		<li> <a href="#creating_and_downloading"> 3.3 Creating and downloading numeric reports and charts as HTML, CSV and PDF files </a> </li>
+                <li> <a href="#security">3.4 Security</a></li>
           		</ul>
         	</li>
 
@@ -113,7 +114,7 @@
       <h1 id="overall_description"> 2. Overall Description </h1>
       <section>
         <h2 id="product_perspective"> 2.1 Product Perspective </h2>
-        <p> GaMon is a new, self-contained product, that is not based on any previous projects. </p>
+        <p> GaMon is a new, self-contained product, that is not based on any previous projects, which was made with the purpose of simplifying how garbage collection in cities is done </p>
       </section>
       <section>
         <h2 id="product_functions"> 2.2 Product Functions</h2>
@@ -190,7 +191,16 @@
           <p>The database must be up and running in order for the queries to take effect and the user must be logged in. </p>
         </section>
       </section>
+      <section>
+        <h2 id="security"> 3.4 Security</h2>
+        <p>
+          The website can prevent sql injection and cross-site scripting with parameterized SQL queries and with the pg module in NodeJS which sanitizes the input.
+          Also the cookie has the httpOnly mode set to true so unwanted people can not acces it.
+
+        </p>
+      </section>
 	</section>
+
 
 	<section>
       <h1 id="development"> 4. Development </h1>
@@ -211,13 +221,14 @@
       <section>
         <h2 id="NodeJS"> 4.3 NodeJS libraries</h3>
         <p>
-          The following libraries have been used and installed using npm: cookie-parser for parsing the cookie, parse-multipart-data for procesing form data, puppeteer for generating pdf of hmtl pages.
+          The following libraries have been used and installed using npm: cookie-parser for parsing the cookie, parse-multipart-data for procesing form data, puppeteer for generating pdf of hmtl pages, svg-chartist for generating svg with charts.
         </p>
       </section>
       <section>
         <h2 id="crypto">4.4 NodeJS crypto</h2>
         <p>
           The crypto libraries has been used for hashing passwords and for asymetric encrytion of the users credentials given to them in a cookie.
+          With the use of a form the credentials are obtained and encrypted with a public Key. The result is put in a cookie which is then used for autentification.
         </p>
       </section>
       

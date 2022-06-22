@@ -17,7 +17,7 @@ async function getToken(req, res) {
     let token = encryptWithPublicKey(key, buf.toString());
 
 
-    res.setHeader('Set-Cookie', cookie.serialize('token', token.toString('base64'), { maxAge: 60 * 60 * 24 * 2, path: '/', sameSite: "lax", secure: 'true' }));
+    res.setHeader('Set-Cookie', cookie.serialize('token', token.toString('base64'), { maxAge: 60 * 60 * 24 * 2, path: '/', sameSite: "lax", secure: 'true' ,httpOnly:"true"}));
     res.writeHead(200);
     res.end();
 }

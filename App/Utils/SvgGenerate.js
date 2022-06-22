@@ -34,7 +34,6 @@ async function makeSvg(data,type,res){
     const newData= await prepareData(data,type);
     
     var dataLabels=Object.keys(newData);
-    console.log(dataLabels);
     
     var values=[];
     for(var i=0; i<dataLabels.length;i++){
@@ -44,7 +43,6 @@ async function makeSvg(data,type,res){
         },0);
         values.push(sum);
     }
-    console.log(values);
     
     const svgData= {
         title: 'SVG BAR CHART',
