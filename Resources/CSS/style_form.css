@@ -4,6 +4,7 @@
 	border-collapse: collapse;	
 	overflow-x:auto;
 	display: inline-block;
+	
 }
 .table td, .table th{
 	border: 0.2rem solid white;
