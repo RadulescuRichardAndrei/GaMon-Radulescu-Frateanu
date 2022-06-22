@@ -31,24 +31,44 @@ async function createPubela(req, res) {
             res.writeHead(403)
             res.end();
         } else {
-            const event = await createPub(req);
-            res.writeHead(200, { 'Content-Type': 'application/json' });
-            res.end(JSON.stringify(event.rows.at(0)));
+            var buf = ''
+            req.on('data', (data) => {
+                buf += data.toString();
+            })
+            req.on('end', () => {
+                const user = JSON.parse(buf);
+
+                createPub(user);
+
+                res.writeHead(200);
+                res.end();
+            })
+
         }
     } catch (err) {
         console.log(err.message);
     }
 }
-async function deletePubela(req, res, id) {
+async function deletePubela(req, res) {
     try {
         var credential = await goodCredentials(req);
+       
         if (credential != 4) {
             res.writeHead(403)
             res.end();
         } else {
-            const event = await deletePub(id);
-            res.writeHead(204);
-            res.end();
+            var buffer = '';
+            req.on('data', (data) => {
+                buffer += data.toString();
+            }).on('end', async function () {
+                var data = JSON.parse(buffer)
+                console.log(data.id);
+                await deletePub(data.id);
+
+
+                res.writeHead(204);
+                res.end();
+            })
         }
     } catch (err) {
         console.log(err.message);

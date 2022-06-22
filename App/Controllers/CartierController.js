@@ -15,20 +15,44 @@ async function createCartier(req,res){
         console.log(err.message);
     }
 }
-async function deleteCartier(req,res,id){
-    try{
-        var credential = await goodCredentials(req);
-        if(credential != 4 ){
-            res.writeHead(403)
+async function addCartier(req, res) {
+    try {
+        var buf = ''
+        req.on('data', (data) => {
+            buf += data.toString();
+        })
+        req.on('end', () => {
+            const user = JSON.parse(buf);
+            
+            createCart(user);
+
+            res.writeHead(200);
             res.end();
-        }else{
-        const Cartiere=await deleteCart(id);
-        res.writeHead(204);
-        res.end();
-        }
-    }catch(err){
-        console.log(err.message);
+        })
+
+    } catch (err) {
+        console.log(err);
     }
+
+}
+async function deleteCartier(req,res){
+    try {
+        var buffer = '';
+        req.on('data', (data)=>{
+            buffer+=data.toString();
+        }).on('end', async function (){
+            var data = JSON.parse(buffer)
+            console.log(data.id);
+            await deleteCart(data.id);
+            res.writeHead(200);
+            res.end(); 
+        
+        })
+        
+       
+     } catch (err) {
+            console.log(err.message);
+        }
 }
 async function getCartierByID(req,res,id){
     try{
@@ -54,5 +78,6 @@ module.exports={
     createCartier,
     deleteCartier,
     getCartierByID,
-    getCartiere
+    getCartiere,
+    addCartier
 }

@@ -2,8 +2,10 @@
 const { parserUser } = require("../API/parser");
 const { encryptWithPublicKey } = require("../Crypto/encrypt");
 const { readPbKey } = require("../Crypto/KeyRead");
+const { createSuperUser } = require("../Models/SuperUserModel");
 const { createUser } = require("../Models/UserModel");
 const cookie = require('cookie');
+
 
 async function Register(req,res){
 try{
@@ -28,4 +30,27 @@ res.end();
 }
 
 }
-module.exports.Register=Register;
+async function RegisterSuperUser(req,res){
+    try{
+    var buf=''
+    req.on('data',(data)=>{
+        buf+=data.toString();
+    })
+    req.on('end',()=>{
+    const user=JSON.parse(buf);
+    console.log(user);
+    createSuperUser(user);
+    
+    res.writeHead(200);
+    res.end();
+    })
+    
+    }catch(err){
+        console.log(err);
+    }
+    
+    }
+module.exports={
+    Register,
+    RegisterSuperUser
+}

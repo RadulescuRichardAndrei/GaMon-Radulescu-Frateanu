@@ -1,12 +1,14 @@
 const pool = require("../API/database");
+const { randomId } = require("../Crypto/crypto-Utils");
 //Create
-async function createPub(req) {
+async function createPub(pub) {
     return new Promise((resolve, reject) => {
         try {
-            const { id, tipGunoi, capacitate, idCartier } = req.body;
+            var id = randomId();
+            
             const newPub = pool.query(
-                `Insert into "Pubele"("ID", "tipGunoi", "capacitate", "idCartier") Values($1,$2,$3,$4) Returning *;`,
-                [id, tipGunoi, capacitate, idCartier]
+                `Insert into "Pubele"("ID", "tipGunoi","dataCuratare", "capacitate","cantitate" ,"idCartier") Values($1,$2,current_date,$3,$4,$5) Returning *;`,
+                [id, pub.tipGunoi, pub.capacitate,pub.cantitate, pub.idCartier]
             );
             resolve(newPub);
         } catch (err) {

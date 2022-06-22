@@ -1,78 +1,64 @@
-function addZona()
-{ 
-    var id=document.Zone.id_zona.value; 
-    var nume=document.Zone.nume.value; 
-    
-    var tr = document.createElement('tr');
-    
-    var td1 = tr.appendChild(document.createElement('td'));
-    var td2 = tr.appendChild(document.createElement('td'));
-    var td3 = tr.appendChild(document.createElement('td'));
-    var td4 = tr.appendChild(document.createElement('td'));
-   
-   /* 
-   fetch('api/addSuperUser',{
+function addZona() {
+    var name = document.Zone.nume.value;
+
+
+    fetch('/api/addZona', {
         method: 'POST',
         body: JSON.stringify({
-         "USERNAME":name,
-         "EMAIL":email
+            "nume": name
+
         })
+
+    }).then((response) => {
+        window.alert('Zona has been registred')
+    }).then(function (err) { console.log(err) }).then(() => {
+        getZona();
+       
+})
+}
+function getZona() {
+    document.getElementById("tb3").textContent = '';
+    fetch('/api/getZone', {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        credentials: "same-origin",
+    }).then(response => response.json()).then(data => {
+        const root = document.getElementById("tb3");
+        for (var i = 0; i < data.json_agg.length; i++) {
+
+            var tr = document.createElement('tr');
+
+            var td1 = tr.appendChild(document.createElement('td'));
+            var td2 = tr.appendChild(document.createElement('td'));
+            var td3 = tr.appendChild(document.createElement('td'));
+
+
+            td1.innerHTML = data.json_agg[i].ID;
+            td2.innerHTML = data.json_agg[i].Nume;
+            td3.innerHTML = '<input type="button" name="del" value="Delete" onclick="delZona(this);" class="btn btn-danger">'
+
+
+            document.getElementById("tb3").appendChild(tr);
+
+
+        }
     })
-*/
-    
-    td1.innerHTML=id;
-    td2.innerHTML=nume;
-    td3.innerHTML='<input type="button" name="del" value="Delete" onclick="delZona(this);" class="btn btn-danger">'
-    td4.innerHTML='<input type="button" name="up" value="Update" onclick="UpZn(this);" class="btn btn-primary">'
 
-    document.getElementById("tb3").appendChild(tr);
 }
 
-function UpZn(zn){
-    var id=document.Zone.id_zona.value; 
-    var nume=document.Zone.nume.value; 
-   
+
+function delZona(zn) {
+    var id = zn.parentNode.parentNode.children[0].innerText;
+ fetch('/api/delZona',{
+    method : 'DELETE',
+    body: JSON.stringify({"id":id,
+     }),
+
+ })
+
     var s = zn.parentNode.parentNode;
-    var tr = document.createElement('tr');
-    
-    var td1 = tr.appendChild(document.createElement('td'));
-    var td2 = tr.appendChild(document.createElement('td'));
-    var td3 = tr.appendChild(document.createElement('td'));
-    var td4 = tr.appendChild(document.createElement('td'));
-  
-    
-    
-    td1.innerHTML='<input type="number" name="id1">';
-    td2.innerHTML='<input type="text" name="nume1">';
-    td3.innerHTML='<input type="button" name="del" value="Delete" onclick="delZona(this);" class="btn btn-danger">'
-    td4.innerHTML='<input type="button" name="up" value="Update" onclick="addUpZn(this);" class="btn btn-primary">'
-
-    document.getElementById("tb3").replaceChild(tr, s);
-}
-
-function addUpZn(zn){
-    var id=document.Zone.id1.value; 
-    var nume=document.Zone.nume1.value; 
-    
-    var s = zn.parentNode.parentNode;
-    var tr = document.createElement('tr');
-    
-    var td1 = tr.appendChild(document.createElement('td'));
-    var td2 = tr.appendChild(document.createElement('td'));
-    var td3 = tr.appendChild(document.createElement('td'));
-    var td4 = tr.appendChild(document.createElement('td'));
-
-    
-    
-    td1.innerHTML=id;
-    td2.innerHTML=nume;
-    td3.innerHTML='<input type="button" name="del" value="Delete" onclick="delZona(this);" class="btn btn-danger">'
-    td4.innerHTML='<input type="button" name="up" value="Update" onclick="UpZn(this);" class="btn btn-primary">'
-
-    document.getElementById("tb3").replaceChild(tr, s);
-}
-
-function delZona(zn){
-    var s=zn.parentNode.parentNode;
     s.parentNode.removeChild(s);
 }
