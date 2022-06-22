@@ -4,7 +4,9 @@ const { allRoutes } = require("./routes");
 function handler(req, res) {
 
     let key = 'default';
-    if( req.url.match('api/generatePDF') && req.method === 'POST'){
+    if( req.url.match('api/generateSVG') && req.method === 'POST'){
+        key='api/generateSVG'
+    }else if( req.url.match('api/generatePDF') && req.method === 'POST'){
         key='api/generatePDF';
     }else if(req.url.match('api/generateCSV') && req.method === 'POST'){
         key='api/generateCSV';

@@ -60,8 +60,19 @@ ${table}
 </html>
 `
 
+const createHtmlSVG=(svg)=>`
+<html lang='en'>
+
+<head></head>
+<body>
+${svg};
+</body>
+</html>
+`
+
 module.exports={
   createRow,
   createTable,
-  createHtml
+  createHtml,
+  createHtmlSVG
 }

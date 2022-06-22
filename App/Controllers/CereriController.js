@@ -6,7 +6,30 @@ const { goodCredentials } = require("./authentificate");
 const { getUserFromToken } = require("./token");
 const converter= require('json-2-csv');
 const puppeteer= require('puppeteer');
+const { makeSvg } = require("../Utils/SvgGenerate");
 
+
+async function RequestsSVGFile(req,res){
+    try {
+        
+        buf = '';
+        req.on('data', (data) => {
+            buf += data.toString();
+        }).on('end', async function(){
+            const rawData = JSON.parse(buf);
+            var query = (await selectDataForReport(rawData.time)).rows.at(0).json_agg;
+            var html=await makeSvg(query,rawData.type,res);
+            
+            res.writeHead(200, { 'Content-Type': 'text/html' })
+            res.end(html);
+            res.end();
+        })
+
+    } catch (err) {
+        console.log(err);
+    }
+
+}
 
 async function RequestsPDFFile(req,res){
     try {
@@ -149,5 +172,6 @@ module.exports = {
     getRequests,
     RequestsHtmlFile,
     RequestsCSVFile,
-    RequestsPDFFile
+    RequestsPDFFile,
+    RequestsSVGFile
 }

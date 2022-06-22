@@ -58,6 +58,14 @@
 			<form class="form" onsubmit="requestPDF(event)">
 				<input type="submit" name="submit" value="Download PDF">
 			</form>
+			<form class="form" onsubmit="requestSVG(event)">
+				<select id="selected-type">
+					<option value="0" selected>Type of Garbage</option>
+					<option value="1">Cartiere</option>
+					<option value="2">Zone</option>
+				</select>
+				<input type="submit" name="submit" value="Download HTML/SVG">
+			</form>
 
 		</div>
 

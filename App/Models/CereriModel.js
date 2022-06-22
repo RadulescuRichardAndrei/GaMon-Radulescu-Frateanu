@@ -115,7 +115,7 @@ async function selectDataForReport(intervalDays){
                JOIN "Cartiere" on "Pubele"."idCartier"="Cartiere"."ID"
                Join "Zone" on "Cartiere"."idZona"="Zone"."ID"
                group by( "Zone"."ID", "Cartiere"."ID","Cereri"."tipGunoi")
-               order by ("Cartiere"."Nume") asc, (Sum("Cereri"."cantitate")) asc) t`,
+               order by ("Zone"."Nume") asc, ("Cartiere"."Nume") asc, (Sum("Cereri"."cantitate")) asc) t`,
                [day]
             );
 

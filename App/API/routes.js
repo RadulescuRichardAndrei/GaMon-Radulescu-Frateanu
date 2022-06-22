@@ -8,7 +8,7 @@ const { UserToken, goodCredentials } = require("../Controllers/authentificate");
 const { getZone } = require("../Controllers/ZonaController");
 const { getCartiere } = require("../Controllers/CartierController");
 const { getPubele, changeStatusPubela,getPubeleRaportat } = require("../Controllers/PubelaController");
-const { createRequest, getRequests, RequestsHtmlFile, RequestsCSVFile,RequestsPDFFile } = require("../Controllers/CereriController");
+const { createRequest, getRequests, RequestsHtmlFile, RequestsCSVFile,RequestsPDFFile, RequestsSVGFile } = require("../Controllers/CereriController");
 const { createReport, getReports, deleteReport } = require("../Controllers/ReportController");
 
 const allRoutes = {
@@ -144,6 +144,9 @@ const allRoutes = {
     },
     'api/generatePDF': function(req,res){
         RequestsPDFFile(req,res);
+    },
+    'api/generateSVG':function(req,res){
+        RequestsSVGFile(req,res);
     },
     default: (req, res) => {
         res.writeHead(404, { "Content-Type": "text/html" });
