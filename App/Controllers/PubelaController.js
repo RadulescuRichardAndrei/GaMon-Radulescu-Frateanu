@@ -62,7 +62,6 @@ async function deletePubela(req, res) {
                 buffer += data.toString();
             }).on('end', async function () {
                 var data = JSON.parse(buffer)
-                console.log(data.id);
                 await deletePub(data.id);
 
 

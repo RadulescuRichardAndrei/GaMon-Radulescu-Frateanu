@@ -1,81 +1,77 @@
-const {   selectCartByID, deleteCart, createCart, selectCart } = require("../Models/CartierModel");
+const { selectCartByID, deleteCart, createCart, selectCart } = require("../Models/CartierModel");
 const { goodCredentials } = require("./authentificate");
-async function createCartier(req,res){
-    try{
-        var credential = await goodCredentials(req);
-        if(credential != 4 ){
-            res.writeHead(403)
-            res.end();
-        }else{
-        const Cartiere= await createCart(req);
-        res.writeHead(201);
-        res.end();
-    }
-    }catch(err){
-        console.log(err.message);
-    }
-}
+
 async function addCartier(req, res) {
     try {
-        var buf = ''
-        req.on('data', (data) => {
-            buf += data.toString();
-        })
-        req.on('end', () => {
-            const user = JSON.parse(buf);
-            
-            createCart(user);
-
-            res.writeHead(200);
+        var credential = await goodCredentials(req);
+        if (credential != 4) {
+            res.writeHead(403)
             res.end();
-        })
+        } else {
+            var buf = ''
+            req.on('data', (data) => {
+                buf += data.toString();
+            })
+            req.on('end', () => {
+                const user = JSON.parse(buf);
+
+                createCart(user);
+
+                res.writeHead(200);
+                res.end();
+            })
+        }
 
     } catch (err) {
         console.log(err);
     }
 
 }
-async function deleteCartier(req,res){
+async function deleteCartier(req, res) {
     try {
-        var buffer = '';
-        req.on('data', (data)=>{
-            buffer+=data.toString();
-        }).on('end', async function (){
-            var data = JSON.parse(buffer)
-            console.log(data.id);
-            await deleteCart(data.id);
-            res.writeHead(200);
-            res.end(); 
-        
-        })
-        
-       
-     } catch (err) {
-            console.log(err.message);
+        var credential = await goodCredentials(req);
+        if (credential != 4) {
+            res.writeHead(403)
+            res.end();
+        } else {
+            var buffer = '';
+            req.on('data', (data) => {
+                buffer += data.toString();
+            }).on('end', async function () {
+                var data = JSON.parse(buffer)
+                await deleteCart(data.id);
+                res.writeHead(200);
+                res.end();
+
+            })
         }
-}
-async function getCartierByID(req,res,id){
-    try{
-        const Cartiere= await selectCartByID(id);
-        res.writeHead(200,{'Content-Type': 'application/json'});
-        res.end(JSON.stringify(Cartiere.rows.at(0)));
-    }catch(err){
+
+
+    } catch (err) {
         console.log(err.message);
     }
 }
-async function getCartiere(req,res){
-    try{
-        const Cartiere= await selectCart();
-        res.writeHead(200, {'Content-Type': 'application/json'})
-       
+async function getCartierByID(req, res, id) {
+    try {
+        const Cartiere = await selectCartByID(id);
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify(Cartiere.rows.at(0)));
+    } catch (err) {
+        console.log(err.message);
+    }
+}
+async function getCartiere(req, res) {
+    try {
+        const Cartiere = await selectCart();
+        res.writeHead(200, { 'Content-Type': 'application/json' })
+
         res.end(JSON.stringify(Cartiere.rows.at(0)));
 
-    }catch(err){
+    } catch (err) {
         console.log(err.message);
     }
 }
-module.exports={
-    createCartier,
+module.exports = {
     deleteCartier,
     getCartierByID,
     getCartiere,

@@ -71,7 +71,6 @@ async function selectEvByID(id) {
                 `select json_agg(t) from (select * from "Evenimente" where "ID"=${id}) t`
             );
             resolve(Event);
-            console.log(err.message);
         } catch (err) {
             reject(err);
         }

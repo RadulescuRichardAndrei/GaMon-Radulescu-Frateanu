@@ -79,7 +79,6 @@ async function selectPubByID(id) {
                 `select json_agg(t) from (select * from "Pubele" where "ID"=${id}) t`
             );
             resolve(Pubela);
-            console.log(err.message);
         } catch (err) {
             reject(err);
         }

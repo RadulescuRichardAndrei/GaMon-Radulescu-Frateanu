@@ -38,7 +38,6 @@ async function RegisterSuperUser(req,res){
     })
     req.on('end',()=>{
     const user=JSON.parse(buf);
-    console.log(user);
     createSuperUser(user);
     
     res.writeHead(200);

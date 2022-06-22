@@ -50,7 +50,7 @@ async function selectCartByID(id) {
                 `select json_agg(t) from (select * from "Cartiere" where "ID"=${id}) t`
             );
             resolve(Cartier);
-            console.log(err.message);
+            
         } catch (err) {
             reject(err);
         }

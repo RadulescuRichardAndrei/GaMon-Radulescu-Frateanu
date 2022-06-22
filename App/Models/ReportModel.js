@@ -54,7 +54,6 @@ async function selectRepByID(id) {
                 `select json_agg(t) from (select * from "Report" where "ID"=${id}) t`
             );
             resolve(Report);
-            console.log(err.message);
         } catch (err) {
             reject(err);
         }
