@@ -81,7 +81,7 @@ async function RequestsReports(event) {
         if (oldReports !== null) {
             root.removeChild(oldReports);
         }
-        if (data.json_agg.length != null) {
+        if (data.json_agg != null) {
             const newReports = document.createElement('div');
             newReports.setAttribute('id', 'table-reports');
 
