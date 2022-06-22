@@ -75,7 +75,7 @@ async function selectReqByID(id) {
                 `select json_agg(t) from (select * from "Cereri" where "ID"=${id}) t`
             );
             resolve(requests);
-            console.log(err.message);
+            
         } catch (err) {
             reject(err);
         }
@@ -91,7 +91,6 @@ async function selectReqByUserID(id) {
             );
             
             resolve(requests);
-            console.log(err.message);
         } catch (err) {
             reject(err);
         }
@@ -121,7 +120,6 @@ async function selectDataForReport(intervalDays){
 
             
             resolve(requests);
-            console.log(err.message);
         } catch (err) {
             reject(err);
         }

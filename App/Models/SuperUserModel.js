@@ -24,8 +24,6 @@ async function createSuperUser(user) {
                 `Insert into "SuperUseri"("ID", "username", "email", "passwordHash", "passwordSalt") Values($1,$2,$3,$4,$5) Returning *;`,
                 [id, user.username, user.email, hash.hashPassword,hash.salt]
             );
-            console.log(id);
-            console.log(user);
 
             resolve(newUser);
         } catch (err) {
