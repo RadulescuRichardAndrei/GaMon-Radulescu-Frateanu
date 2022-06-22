@@ -9,7 +9,7 @@ const { UserToken, goodCredentials } = require("../Controllers/authentificate");
 const { getZone, addZona, deleteZona  } = require("../Controllers/ZonaController");
 const { getCartiere, addCartier,deleteCartier } = require("../Controllers/CartierController");
 const { getPubele, changeStatusPubela,getPubeleRaportat, createPubela, deletePubela } = require("../Controllers/PubelaController");
-const { createRequest, getRequests } = require("../Controllers/CereriController");
+const { createRequest, getRequests, RequestsPDFFile, RequestsSVGFile, RequestsHtmlFile } = require("../Controllers/CereriController");
 
 const { createReport, getReports, deleteReport } = require("../Controllers/ReportController");
 const {getSuperUser, deleteSuperUser} = require("../Controllers/SuperUserController");
