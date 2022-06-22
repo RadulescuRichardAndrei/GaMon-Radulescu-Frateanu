@@ -27,6 +27,14 @@ function getZona() {
         credentials: "same-origin",
     }).then(response => response.json()).then(data => {
         const root = document.getElementById("tb3");
+        var tr = document.createElement('tr');
+        var td1 = tr.appendChild(document.createElement('th'));
+        var td2 = tr.appendChild(document.createElement('th'));
+        var td3 = tr.appendChild(document.createElement('th'));
+       td1.innerHTML="ID";
+       td2.innerHTML="Nume";
+       td3.innerHTML="Delete"
+      root.appendChild(tr);
         for (var i = 0; i < data.json_agg.length; i++) {
 
             var tr = document.createElement('tr');
@@ -41,10 +49,11 @@ function getZona() {
             td3.innerHTML = '<input type="button" name="del" value="Delete" onclick="delZona(this);" class="btn btn-danger">'
 
 
-            document.getElementById("tb3").appendChild(tr);
+            root.appendChild(tr);
 
 
         }
+
     })
 
 }
@@ -60,5 +69,10 @@ function delZona(zn) {
  })
 
     var s = zn.parentNode.parentNode;
+   
+    
     s.parentNode.removeChild(s);
+ 
+  
+
 }

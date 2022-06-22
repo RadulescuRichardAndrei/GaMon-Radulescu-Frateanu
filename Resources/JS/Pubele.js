@@ -30,7 +30,23 @@ function getPubela() {
         },
         credentials: "same-origin",
     }).then(response => response.json()).then(data => {
-        const root = document.getElementById("tb3");
+        const root = document.getElementById("tbl2");
+        var tr = document.createElement('tr');
+        var td1 = tr.appendChild(document.createElement('th'));
+        var td2 = tr.appendChild(document.createElement('th'));
+        var td3 = tr.appendChild(document.createElement('th'));
+        var td4 = tr.appendChild(document.createElement('th'));
+        var td5 = tr.appendChild(document.createElement('th'));
+        var td6 = tr.appendChild(document.createElement('th'));
+        var td7 = tr.appendChild(document.createElement('th'));
+       td1.innerHTML="ID";
+       td2.innerHTML="TipGunoi";
+       td3.innerHTML="dataCuratare";
+       td4.innerHTML="capacitate";
+       td5.innerHTML="cantitate";
+       td6.innerHTML="idCartier";
+       td7.innerHTML="Delete";
+      root.appendChild(tr);
         for (var i = 0; i < data.json_agg.length; i++) {
 
             var tr = document.createElement('tr');
@@ -73,4 +89,5 @@ function delPubela(pb) {
 
     var s = pb.parentNode.parentNode;
     s.parentNode.removeChild(s);
+  
 }
