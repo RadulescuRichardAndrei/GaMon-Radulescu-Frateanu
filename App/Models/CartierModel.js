@@ -1,12 +1,13 @@
 const pool = require("../API/database");
+const { randomId } = require("../Crypto/crypto-Utils");
 //Create
-async function createCart(req) {
+async function createCart(cart) {
     return new Promise((resolve, reject) => {
         try {
-            const { id,  nume, adresa, idZona  } = req.body;
+            var id = randomId();
             const newCartier = pool.query(
                 `Insert into "Cartiere"("ID", "Nume", "adresa", "idZona") Values($1,$2,$3,$4) Returning *;`,
-                [id, nume, adresa, idZona]
+                [id, cart.nume, cart.adresa, cart.idZona]
             );
             resolve(newCartier);
         } catch (err) {

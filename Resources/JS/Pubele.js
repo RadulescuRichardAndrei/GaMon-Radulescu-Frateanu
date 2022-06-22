@@ -1,93 +1,76 @@
-function addPubela()
-    { 
-        var id=document.Pubele.id_pubela.value; 
-        var tipgunoi=document.Pubele.tipgunoi.value; 
-        var capacitate=document.Pubele.capacitate.value;
-        var idcartier=document.Pubele.idcartier.value;
-        
-        var tr = document.createElement('tr');
-        
-        var td1 = tr.appendChild(document.createElement('td'));
-        var td2 = tr.appendChild(document.createElement('td'));
-        var td3 = tr.appendChild(document.createElement('td'));
-        var td4 = tr.appendChild(document.createElement('td'));
-        var td5 = tr.appendChild(document.createElement('td'));
-        var td6 = tr.appendChild(document.createElement('td'));
-       /* 
-       fetch('api/addSuperUser',{
-            method: 'POST',
-            body: JSON.stringify({
-             "USERNAME":name,
-             "EMAIL":email
-            })
-        })
-*/
-        
-        td1.innerHTML=id;
-        td2.innerHTML=tipgunoi;
-        td3.innerHTML=capacitate;
-        td4.innerHTML=idcartier;
-        td5.innerHTML='<input type="button" name="del" value="Delete" onclick="delPubela(this);" class="btn btn-danger">'
-        td6.innerHTML='<input type="button" name="up" value="Update" onclick="UpPub(this);" class="btn btn-primary">'
+function addPubela() {
+    var tgunoi = document.getElementById("selected_type").value;
+    var cap = document.Pubele.capacitate.value;
+    var cant = document.Pubele.cantitate.value;
+    var idCartier = document.Pubele.idcartier.value;
 
-        document.getElementById("tbl2").appendChild(tr);
-    }
+    fetch('/api/addPubela', {
+        method: 'POST',
+        body: JSON.stringify({
+            "tipGunoi": tgunoi,
+            "capacitate":cap,
+            "cantitate":cant,
+            "idCartier":idCartier
 
-    function UpPub(pub){
-        var id=document.Pubele.id_pubela.value; 
-        var tipgunoi=document.Pubele.tipgunoi.value; 
-        var capacitate=document.Pubele.capacitate.value;
-        var idcartier=document.Pubele.idcartier.value;
+        } ),credentials: "same-origin"
+    }).then((response) => {
+        window.alert('Pubela has been registred')
+    }).then(function (err) { console.log(err) }).then(() => {
+        getPubela();
+       
+})
+}
+function getPubela() {
+    document.getElementById("tbl2").textContent = '';
+    fetch('/api/Pubele', {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        credentials: "same-origin",
+    }).then(response => response.json()).then(data => {
+        const root = document.getElementById("tb3");
+        for (var i = 0; i < data.json_agg.length; i++) {
 
-        var s = pub.parentNode.parentNode;
-        var tr = document.createElement('tr');
-        
-        var td1 = tr.appendChild(document.createElement('td'));
-        var td2 = tr.appendChild(document.createElement('td'));
-        var td3 = tr.appendChild(document.createElement('td'));
-        var td4 = tr.appendChild(document.createElement('td'));
-        var td5 = tr.appendChild(document.createElement('td'));
-        var td6 = tr.appendChild(document.createElement('td'));
-        
-        
-        td1.innerHTML='<input type="number" name="id1">';
-        td2.innerHTML='<input type="text" name="tipgunoi1">';
-        td3.innerHTML='<input type="number" name="capacitate1">';
-        td4.innerHTML='<input type="number" name="idcartier1">';
-        td5.innerHTML='<input type="button" name="del" value="Delete" onclick="delPubela(this);" class="btn btn-danger">'
-        td6.innerHTML='<input type="button" name="up" value="Update" onclick="addUpPub(this);" class="btn btn-primary">'
+            var tr = document.createElement('tr');
 
-        document.getElementById("tbl2").replaceChild(tr, s);
-    }
 
-    function addUpPub(pub){
-        var id=document.Pubele.id1.value; 
-        var tipgunoi=document.Pubele.tipgunoi1.value; 
-        var capacitate=document.Pubele.capacitate1.value;
-        var idcartier=document.Pubele.idcartier1.value;
-        
-        var s = pub.parentNode.parentNode;
-        var tr = document.createElement('tr');
-        
-        var td1 = tr.appendChild(document.createElement('td'));
-        var td2 = tr.appendChild(document.createElement('td'));
-        var td3 = tr.appendChild(document.createElement('td'));
-        var td4 = tr.appendChild(document.createElement('td'));
-        var td5 = tr.appendChild(document.createElement('td'));
-        var td6 = tr.appendChild(document.createElement('td'));
-        
-        
-        td1.innerHTML=id;
-        td2.innerHTML=tipgunoi;
-        td3.innerHTML=capacitate;
-        td4.innerHTML=idcartier;
-        td5.innerHTML='<input type="button" name="del" value="Delete" onclick="delPubela(this);" class="btn btn-danger">'
-        td6.innerHTML='<input type="button" name="up" value="Update" onclick="UpPub(this);" class="btn btn-primary">'
+            var td1 = tr.appendChild(document.createElement('td'));
+            var td2 = tr.appendChild(document.createElement('td'));
+            var td3 = tr.appendChild(document.createElement('td'));
+            var td4 = tr.appendChild(document.createElement('td'));
+            var td5 = tr.appendChild(document.createElement('td'));
+            var td6 = tr.appendChild(document.createElement('td'));
+            var td7 = tr.appendChild(document.createElement('td'));
 
-        document.getElementById("tbl2").replaceChild(tr, s);
-    }
+            td1.innerHTML = data.json_agg[i].ID;
+            td2.innerHTML = data.json_agg[i].tipGunoi;
+            td3.innerHTML = data.json_agg[i].dataCuratare
+            td4.innerHTML = data.json_agg[i].capacitate;
+            td5.innerHTML = data.json_agg[i].cantitate;
+            td6.innerHTML = data.json_agg[i].idCartier
+            td7.innerHTML = '<input type="button" name="del" value="Delete" onclick="delPubela(this);" class="btn btn-danger">'
 
-    function delPubela(pub){
-        var s=pub.parentNode.parentNode;
-        s.parentNode.removeChild(s);
-    }
+
+            document.getElementById("tbl2").appendChild(tr);
+
+
+        }
+    })
+
+}
+
+
+function delPubela(pb) {
+    var id = pb.parentNode.parentNode.children[0].innerText;
+ fetch('/api/delPubela',{
+    method : 'DELETE',
+    body: JSON.stringify({"id":id
+     })
+
+ })
+
+    var s = pb.parentNode.parentNode;
+    s.parentNode.removeChild(s);
+}

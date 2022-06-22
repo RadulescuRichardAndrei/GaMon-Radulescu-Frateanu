@@ -1,59 +1,84 @@
-const {   selectZonaByID, deletZona, creatZona, selectZone } = require("../Models/ZonaModel");
+const { selectZonaByID, deletZona, creatZona, selectZone } = require("../Models/ZonaModel");
 const { goodCredentials } = require("./authentificate");
 
-async function createZona(req,res){
-    try{
+async function createZona(req, res) {
+    try {
         var credential = await goodCredentials(req);
-        if(credential != 4 ){
+        if (credential != 4) {
             res.writeHead(403)
             res.end();
-        }else{
-        const zone= await creatZona(req);
-        res.writeHead(200,{'Content-Type': 'application/json'});
-        res.end(JSON.stringify(zone.rows.at(0)));
+        } else {
+            const zone = await creatZona(req);
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify(zone.rows.at(0)));
         }
-    }catch(err){
+    } catch (err) {
         console.log(err.message);
     }
 }
-async function deleteZona(req,res,id){
-    try{
-        var credential = await goodCredentials(req);
-        if(credential != 4 ){
-            res.writeHead(403)
-            res.end();
-        }else{
-        const zone=await deletZona(id);
-        res.writeHead(200,{'Content-Type': 'application/json'});
-        res.end(JSON.stringify(zone.rows.at(0)));
-        }
-    }catch(err){
-        console.log(err.message);
-    }
-}
-async function getZonaByID(req,res,id){
-    try{
-        const zone= await selectZonaByID(id);
-        res.writeHead(200,{'Content-Type': 'application/json'});
-        res.end(JSON.stringify(zone.rows.at(0)));
-    }catch(err){
-        console.log(err.message);
-    }
-}
-async function getZone(req,res){
-    try{
-        const Cartiere= await selectZone();
-        res.writeHead(200, {'Content-Type': 'application/json'})
-       
-        res.end(JSON.stringify(Cartiere.rows.at(0)));
+async function addZona(req, res) {
+    try {
+        var buf = ''
+        req.on('data', (data) => {
+            buf += data.toString();
+        })
+        req.on('end', () => {
+            const user = JSON.parse(buf);
+            console.log(user);
+            creatZona(user);
 
-    }catch(err){
+            res.writeHead(200);
+            res.end();
+        })
+
+    } catch (err) {
+        console.log(err);
+    }
+
+}
+async function deleteZona(req, res) {
+    try {
+        var buffer = '';
+        req.on('data', (data)=>{
+            buffer+=data.toString();
+        }).on('end', async function (){
+            var data = JSON.parse(buffer)
+            console.log(data.id);
+            await deletZona(data.id);
+            res.writeHead(200);
+            res.end(); 
+        
+        })
+        
+       
+     } catch (err) {
+            console.log(err.message);
+        }
+}
+async function getZonaByID(req, res, id) {
+    try {
+        const zone = await selectZonaByID(id);
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify(zone.rows.at(0)));
+    } catch (err) {
         console.log(err.message);
     }
 }
-module.exports={
+async function getZone(req, res) {
+    try {
+        const zone = await selectZone();
+        res.writeHead(200, { 'Content-Type': 'application/json' })
+
+        res.end(JSON.stringify(zone.rows.at(0)));
+
+    } catch (err) {
+        console.log(err.message);
+    }
+}
+module.exports = {
     createZona,
     deleteZona,
     getZonaByID,
-    getZone
+    getZone,
+    addZona
 }

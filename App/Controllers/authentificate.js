@@ -17,13 +17,14 @@ function containCredentials(credentials, users, superUsers) {
         if(adminPsHash.match(password))
         return 4;
     }
-
+if(users!=null)
     for (var i = 0; i < users.length; i++)
         if (credentials.username.match(users[i].username)) {
             var password = hashPasswordSalt(credentials.password, users[i].passwordSalt)
             if (users[i].passwordHash.match(password))
                 return 1;
         }
+  if(superUsers!=null)      
     for (var i = 0; i < superUsers.length; i++)
         if (credentials.username.match(superUsers[i].username)) {
             var password = hashPasswordSalt(credentials.password, superUsers.at(i).passwordSalt)
