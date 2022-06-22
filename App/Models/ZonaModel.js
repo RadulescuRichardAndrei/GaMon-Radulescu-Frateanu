@@ -1,4 +1,5 @@
 const pool = require("../API/database");
+const { randomId } = require("../Crypto/crypto-Utils");
 async function selectZone(){
     return new Promise((resolve, reject) => {
         try {
@@ -11,15 +12,15 @@ async function selectZone(){
         }
     })
 }
-async function creatZona(req) {
+async function creatZona(zona) {
     return new Promise((resolve, reject) => {
         try {
-            const { id,  nume, adresa, idZona  } = req.body;
-            const newCartier = pool.query(
-                `Insert into "Cartiere"("ID", "Nume", "adresa", "idZona") Values($1,$2,$3,$4) Returning *;`,
-                [id, nume, adresa, idZona]
+         var id = randomId();
+            const newZona = pool.query(
+                `Insert into "Zone"("ID", "Nume") Values($1,$2) Returning *;`,
+                [id, zona.nume]
             );
-            resolve(newCartier);
+            resolve(newZona);
         } catch (err) {
             reject(err);
         }
@@ -29,8 +30,8 @@ async function creatZona(req) {
 async function deletZona(id) {
     return new Promise((resolve, reject) => {
         try {
-            const deletedCartier = pool.query(
-                `delete from "Cartiere" where "ID"=${id};`,
+            const deletedZona = pool.query(
+                `delete from "Zone" where "ID"=${id};`,
             );
             resolve();
         } catch (err) {

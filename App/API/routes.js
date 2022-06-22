@@ -2,14 +2,17 @@ const { selectEvents } = require("../Models/eventModel");
 const fs = require('fs');
 const path = require('path');
 const { getEvents, getEventByID, createEvent, updateEvent, deleteEvent } = require("../Controllers/eventController");
-const { Register } = require("../Controllers/registerController");
+const { Register,RegisterSuperUser } = require("../Controllers/registerController");
 const { getToken } = require("../Controllers/token");
 const { UserToken, goodCredentials } = require("../Controllers/authentificate");
-const { getZone } = require("../Controllers/ZonaController");
-const { getCartiere } = require("../Controllers/CartierController");
-const { getPubele, changeStatusPubela,getPubeleRaportat } = require("../Controllers/PubelaController");
-const { createRequest, getRequests, RequestsHtmlFile, RequestsCSVFile,RequestsPDFFile, RequestsSVGFile } = require("../Controllers/CereriController");
+
+const { getZone, addZona, deleteZona  } = require("../Controllers/ZonaController");
+const { getCartiere, addCartier,deleteCartier } = require("../Controllers/CartierController");
+const { getPubele, changeStatusPubela,getPubeleRaportat, createPubela, deletePubela } = require("../Controllers/PubelaController");
+const { createRequest, getRequests } = require("../Controllers/CereriController");
+
 const { createReport, getReports, deleteReport } = require("../Controllers/ReportController");
+const {getSuperUser, deleteSuperUser} = require("../Controllers/SuperUserController");
 
 const allRoutes = {
     'auth': function (req, res) {
@@ -107,11 +110,21 @@ const allRoutes = {
     'api/Zone': function (req, res) {
         getZone(req, res);
     },
+    'api/getZone': function (req, res) {
+        getZone(req, res);
+    },
     'api/Cartiere': function (req, res) {
         getCartiere(req, res);
     },
     'api/Pubele': function (req, res) {
         getPubele(req, res);
+    },
+    '/api/addPubela':function (req,res){
+        createPubela(req,res);
+    },
+    '/api/delPubela':function (req,res){
+        
+        deletePubela(req,res);
     },
     'api/Cerere': function (req, res) {
         createRequest(req, res);
@@ -148,6 +161,31 @@ const allRoutes = {
     'api/generateSVG':function(req,res){
         RequestsSVGFile(req,res);
     },
+    '/api/RegisterSuperUser' :function(req,res){
+        RegisterSuperUser(req,res);
+    },
+    '/api/selectSuperUser' :function(req,res){
+        getSuperUser(req,res);
+    },
+    '/api/delSuperUser' :function(req,res){
+        deleteSuperUser(req,res);
+    },
+    '/api/addZona' :function(req,res){
+        addZona(req,res);
+    },
+    '/api/delZona' :function(req,res){
+        deleteZona(req,res);
+    },
+    '/api/addCartier':function(req,res){
+        addCartier(req,res);
+    },
+    '/api/getCartiere':function(req,res){
+        getCartier(req,res);
+    },
+    '/api/delCartier':function(req,res){
+        deleteCartier(req,res);
+    },
+    
     default: (req, res) => {
         res.writeHead(404, { "Content-Type": "text/html" });
         res.end("No Page Found");
