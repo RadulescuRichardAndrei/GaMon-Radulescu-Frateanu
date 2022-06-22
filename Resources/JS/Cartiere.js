@@ -29,7 +29,20 @@ function getCartier() {
         },
         credentials: "same-origin",
     }).then(response => response.json()).then(data => {
-        const root = document.getElementById("tb3");
+        
+        const root = document.getElementById("tb4");
+        var tr = document.createElement('tr');
+        var td1 = tr.appendChild(document.createElement('th'));
+        var td2 = tr.appendChild(document.createElement('th'));
+        var td3 = tr.appendChild(document.createElement('th'));
+        var td4 = tr.appendChild(document.createElement('th'));
+        var td5 = tr.appendChild(document.createElement('th'));
+       td1.innerHTML="ID";
+       td2.innerHTML="Nume";
+       td3.innerHTML="adresa";
+       td4.innerHTML="id_Zona";
+       td5.innerHTML="Delete";
+      root.appendChild(tr);
         for (var i = 0; i < data.json_agg.length; i++) {
 
             var tr = document.createElement('tr');
@@ -68,4 +81,5 @@ function delCartier(cr) {
 
     var s = cr.parentNode.parentNode;
     s.parentNode.removeChild(s);
+   
 }

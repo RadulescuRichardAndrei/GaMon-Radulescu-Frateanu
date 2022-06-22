@@ -23,6 +23,18 @@ function addSuperUser() {
         credentials: "same-origin",
     }).then(response => response.json()).then(data => {
         const root = document.getElementById("tbl1");
+        var tr = document.createElement('tr');
+        var td1 = tr.appendChild(document.createElement('th'));
+        var td2 = tr.appendChild(document.createElement('th'));
+        var td3 = tr.appendChild(document.createElement('th'));
+        var td4 = tr.appendChild(document.createElement('th'));
+        var td5 = tr.appendChild(document.createElement('th'));
+       td1.innerHTML="ID";
+       td2.innerHTML="Username";
+       td3.innerHTML="Email";
+       td4.innerHTML="Password";
+       td5.innerHTML="Delete";
+      root.appendChild(tr);
         for (var i = 0; i < data.json_agg.length; i++) {
             
     var tr = document.createElement('tr');
@@ -59,7 +71,20 @@ function getSuperUser() {
         },
         credentials: "same-origin",
     }).then(response => response.json()).then(data => {
+        
         const root = document.getElementById("tbl1");
+        var tr = document.createElement('tr');
+        var td1 = tr.appendChild(document.createElement('th'));
+        var td2 = tr.appendChild(document.createElement('th'));
+        var td3 = tr.appendChild(document.createElement('th'));
+        var td4 = tr.appendChild(document.createElement('th'));
+        var td5 = tr.appendChild(document.createElement('th'));
+       td1.innerHTML="ID";
+       td2.innerHTML="Username";
+       td3.innerHTML="Email";
+       td4.innerHTML="Password";
+       td5.innerHTML="Delete";
+      root.appendChild(tr);
         for (var i = 0; i < data.json_agg.length; i++) {
             
     var tr = document.createElement('tr');
@@ -96,6 +121,7 @@ function delUser(usr) {
 
     var s = usr.parentNode.parentNode;
     s.parentNode.removeChild(s);
+
 }
 
 
