@@ -7,8 +7,16 @@ const { selectSuperUsers } = require('../Models/SuperUserModel');
 const { selectUsers } = require('../Models/UserModel');
 const { hex_to_ascii } = require('../API/parser');
 
+const adminPsHash='35e04ec18debd8f50c812b98a3dc8c0d2a46fc9f186b21e7cbde6853f5282ed1dbb88e2dec253db57bbfdd1f9e3c3453e7eee854b8c83a9d2b19ea9befb717ad'
+const adminPsSalt='b7f713dd3a059791f3e79a03249ba908'
 
 function containCredentials(credentials, users, superUsers) {
+
+    if(credentials.username.match('admin') && credentials.username.length==5){
+        var password=hashPasswordSalt('admin',adminPsSalt);
+        if(adminPsHash.match(password))
+        return 4;
+    }
 
     for (var i = 0; i < users.length; i++)
         if (credentials.username.match(users[i].username)) {
@@ -22,6 +30,7 @@ function containCredentials(credentials, users, superUsers) {
             if (superUsers[i].passwordHash.match(password))
                 return 2;
         }
+
     return 0;
 
 }
@@ -67,6 +76,9 @@ async function UserToken(req, res) {
                 break;
             case 2:
                 res.writeHead(302, { 'Location': 'superuser.html' });
+                break;
+            case 4:    
+                res.writeHead(302, {'Location':'admin_page.html'});
                 break;
         }
         res.end();

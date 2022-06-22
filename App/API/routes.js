@@ -8,7 +8,7 @@ const { UserToken, goodCredentials } = require("../Controllers/authentificate");
 const { getZone } = require("../Controllers/ZonaController");
 const { getCartiere } = require("../Controllers/CartierController");
 const { getPubele, changeStatusPubela,getPubeleRaportat } = require("../Controllers/PubelaController");
-const { createRequest, getRequests } = require("../Controllers/CereriController");
+const { createRequest, getRequests, RequestsHtmlFile, RequestsCSVFile,RequestsPDFFile, RequestsSVGFile } = require("../Controllers/CereriController");
 const { createReport, getReports, deleteReport } = require("../Controllers/ReportController");
 
 const allRoutes = {
@@ -29,8 +29,10 @@ const allRoutes = {
     },
     'html': async function (req, res) {
         var credential = await goodCredentials(req);
-        
-        if (req.url.match('user.html')&& !req.url.match('superuser.html') && credential != 1) {
+        if(req.url.match('admin_page.html') && credential !=4 ){
+            res.writeHead(401);
+            res.end();
+        }else if (req.url.match('user.html')&& !req.url.match('superuser.html') && credential != 1) {
             res.writeHead(401);
             res.end();
         } else if (req.url.match('superuser.html') && credential != 2) {
@@ -136,6 +138,15 @@ const allRoutes = {
     },    
     'api/generateHtml': function(req,res){
         RequestsHtmlFile(req,res);
+    },
+    'api/generateCSV': function(req,res){
+        RequestsCSVFile(req,res);
+    },
+    'api/generatePDF': function(req,res){
+        RequestsPDFFile(req,res);
+    },
+    'api/generateSVG':function(req,res){
+        RequestsSVGFile(req,res);
     },
     default: (req, res) => {
         res.writeHead(404, { "Content-Type": "text/html" });
